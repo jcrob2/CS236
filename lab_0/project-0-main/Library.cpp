@@ -74,6 +74,7 @@ void Library::organizeBooksByGenre() {
         else {
             std::vector<Book*> bookList = it->second;
             bookList.push_back(book);
+            it->second = bookList; //Added this line. Do I really know what this does? No. But OrganizeByAuthor had it and it works
         }
     }
 }
