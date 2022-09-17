@@ -18,6 +18,44 @@ void Lexer::CreateAutomata() {
 
 void Lexer::Run(std::string& input) {
     // TODO: convert this pseudo-code with the algorithm into actual C++ code
+    int lineNumber = 1;
+
+    while (input.size() > 0) {
+        int maxRead = 0;
+        int inputRead = 0;
+        Automaton* maxAutomaton = automata[0];
+
+        //handle whitespace
+        if (input.begin() == '\n'){
+            //lineNumber++; This is maybe handled in the Automaton classes
+            input.erase(input.begin());
+        }
+        else if (input.begin() == ' ') {
+            input.erase(input.begin());
+        }
+
+        //Parallel portion
+        for (i=0; i < automata.size(); i++){
+            inputRead = automata[i].Start(input);
+            if (inputRead > maxRead) {
+                maxRead = inputRead;
+                maxAutomaton = automata[i];
+            }
+        }
+
+        //Max portion
+        if (maxRead > 0) {
+            Token* newToken = maxAutomaton->CreateToken();
+            lineNumber += maxAutomaton->NewLinesRead();
+            tokens.push_back(newToken);
+        }
+
+        else{
+            maxRead = 1;
+            Token* newToken = new Token(UNDEFINED, input.begin(), lineNumber); //No idea if this is right
+
+        }
+    }
     /*
     set lineNumber to 1
     // While there are more characters to tokenize
