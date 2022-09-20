@@ -8,6 +8,14 @@ Lexer::Lexer() {
 
 Lexer::~Lexer() {
     // TODO: need to clean up the memory in `automata` and `tokens`
+    for (Automaton* obj : automata){
+        delete obj;
+    }
+    automata.clear();
+    for (Token* tok : tokens){
+        delete tok;
+    }
+    tokens.clear();
 }
 
 void Lexer::CreateAutomata() {
@@ -26,17 +34,17 @@ void Lexer::Run(std::string& input) {
         Automaton* maxAutomaton = automata[0];
 
         //handle whitespace
-        if (input.begin() == '\n'){
+        if (input[0] == '\n'){
             //lineNumber++; This is maybe handled in the Automaton classes
             input.erase(input.begin());
         }
-        else if (input.begin() == ' ') {
+        else if (input[0] == ' ') {
             input.erase(input.begin());
         }
 
         //Parallel portion
-        for (i=0; i < automata.size(); i++){
-            inputRead = automata[i].Start(input);
+        for (int i=0; i < automata.size(); i++){
+            inputRead = automata[i]->Start(input);
             if (inputRead > maxRead) {
                 maxRead = inputRead;
                 maxAutomaton = automata[i];
@@ -45,15 +53,15 @@ void Lexer::Run(std::string& input) {
 
         //Max portion
         if (maxRead > 0) {
-            Token* newToken = maxAutomaton->CreateToken();
+            Token* newToken = maxAutomaton->CreateToken(input, lineNumber);
             lineNumber += maxAutomaton->NewLinesRead();
             tokens.push_back(newToken);
         }
 
         else{
             maxRead = 1;
-            Token* newToken = new Token(UNDEFINED, input.begin(), lineNumber); //No idea if this is right
-
+            Token* newToken = ; //No idea if this is right - it wasn't
+            tokens.push_back(newToken);
         }
     }
     /*
@@ -62,9 +70,7 @@ void Lexer::Run(std::string& input) {
     loop while input.size() > 0 {
         set maxRead to 0
         set maxAutomaton to the first automaton in automata
-
         // TODO: you need to handle whitespace inbetween tokens
-
         // Here is the "Parallel" part of the algorithm
         //   Each automaton runs with the same input
         foreach automaton in automata {
