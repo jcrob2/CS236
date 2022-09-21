@@ -1,6 +1,8 @@
 #include "Lexer.h"
 #include "ColonAutomaton.h"
 #include "ColonDashAutomaton.h"
+#include "UndefinedAutomaton.h"
+#include "EndOfFileAutomaton.h"
 
 Lexer::Lexer() {
     CreateAutomata();
@@ -21,19 +23,25 @@ Lexer::~Lexer() {
 void Lexer::CreateAutomata() {
     automata.push_back(new ColonAutomaton());
     automata.push_back(new ColonDashAutomaton());
+
     // TODO: Add the other needed automata here
+
+    automata.push_back(new UndefinedAutomaton());
+    automata.push_back(new EndOfFileAutomaton());
 }
 
 void Lexer::Run(std::string& input) {
     // TODO: convert this pseudo-code with the algorithm into actual C++ code
     int lineNumber = 1;
 
-    while (input.size() > 0) {
+    //TODO: reduce the size of the input after a get a token
+    while (input[0] != EOF) {
         int maxRead = 0;
         int inputRead = 0;
-        Automaton* maxAutomaton = automata[0];
+        maxAutomaton = automata[0];
 
         //handle whitespace
+        //TODO handle tabs and check if file is empty before this stuff
         if (input[0] == '\n'){
             //lineNumber++; This is maybe handled in the Automaton classes
             input.erase(input.begin());
@@ -43,27 +51,37 @@ void Lexer::Run(std::string& input) {
         }
 
         //Parallel portion
-        for (int i=0; i < automata.size(); i++){
-            inputRead = automata[i]->Start(input);
+        for (auto eachAutomaton : automata){
+        //for (int i=0; i < automata.size(); i++){
+            inputRead = eachAutomaton->Start(input);
             if (inputRead > maxRead) {
                 maxRead = inputRead;
-                maxAutomaton = automata[i];
+                maxAutomaton = eachAutomaton;
             }
         }
 
         //Max portion
         if (maxRead > 0) {
-            Token* newToken = maxAutomaton->CreateToken(input, lineNumber);
+            //create substring for token creation from input string to pass into createToken()
+            std::string tokString = input.substr(0,maxRead);
+            //TODO: token doesn't update with tokString and lineNumber correctly and is stuck on the COLON tokenType
+            Token* newToken = maxAutomaton->CreateToken(tokString, lineNumber);
             lineNumber += maxAutomaton->NewLinesRead();
             tokens.push_back(newToken);
         }
 
         else{
             maxRead = 1;
-            Token* newToken = ; //No idea if this is right - it wasn't
+            //create new automaton for undefined and eof to set maxAutomaton to and then call createToken on max automaton
+            maxAutomaton = automata[automata.size()-2];
+            Token* newToken = maxAutomaton->CreateToken(input, lineNumber);
             tokens.push_back(newToken);
         }
+        input.erase(0,maxRead);
     }
+    maxAutomaton = automata[automata.size()-1];
+    Token* eofToken = maxAutomaton->CreateToken(input, lineNumber);
+    tokens.push_back(eofToken);
     /*
     set lineNumber to 1
     // While there are more characters to tokenize

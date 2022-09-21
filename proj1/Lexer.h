@@ -19,7 +19,7 @@ public:
     ~Lexer();
 
     void Run(std::string& input);
-    
+    Automaton* maxAutomaton;
     // TODO: add other public methods here
 
 };
