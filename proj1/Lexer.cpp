@@ -51,12 +51,14 @@ void Lexer::Run(std::string& input) {
         }
 
         //Parallel portion
-        for (auto eachAutomaton : automata){
-        //for (int i=0; i < automata.size(); i++){
-            inputRead = eachAutomaton->Start(input);
+        //for (auto eachAutomaton : automata){
+        for (int i=0; i < automata.size(); i++){
+            //inputRead = eachAutomaton->Start(input);
+            inputRead = automata[i]->Start(input);
             if (inputRead > maxRead) {
                 maxRead = inputRead;
-                maxAutomaton = eachAutomaton;
+               // maxAutomaton = eachAutomaton;
+               maxAutomaton = automata[i];
             }
         }
 
@@ -74,7 +76,7 @@ void Lexer::Run(std::string& input) {
             maxRead = 1;
             //create new automaton for undefined and eof to set maxAutomaton to and then call createToken on max automaton
             maxAutomaton = automata[automata.size()-2];
-            Token* newToken = maxAutomaton->CreateToken(input, lineNumber);
+            Token* newToken = maxAutomaton->CreateToken(input[0], lineNumber);
             tokens.push_back(newToken);
         }
         input.erase(0,maxRead);
