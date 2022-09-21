@@ -20,6 +20,14 @@ public:
 
     void Run(std::string& input);
     Automaton* maxAutomaton;
+
+    //TODO: finish toString();
+    std::string toString() const;
+
+    friend std::ostream& operator<< (std::ostream& os, const Lexer& lex){
+        os << lex.toString();
+        return os;
+    }
     // TODO: add other public methods here
 
 };

@@ -38,6 +38,7 @@ int main(int argc, char** argv) {
 
     Lexer* lexer = new Lexer();
     lexer->Run(input);
+    std::cout << *lexer;
     // TODO
 
     delete lexer;

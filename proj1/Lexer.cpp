@@ -3,6 +3,7 @@
 #include "ColonDashAutomaton.h"
 #include "UndefinedAutomaton.h"
 #include "EndOfFileAutomaton.h"
+#include <sstream>
 
 Lexer::Lexer() {
     CreateAutomata();
@@ -10,14 +11,14 @@ Lexer::Lexer() {
 
 Lexer::~Lexer() {
     // TODO: need to clean up the memory in `automata` and `tokens`
-    for (Automaton* obj : automata){
-        delete obj;
-    }
-    automata.clear();
-    for (Token* tok : tokens){
-        delete tok;
-    }
-    tokens.clear();
+//    for (Automaton* obj : automata){
+//        delete obj;
+//    }
+//    automata.clear();
+//    for (Token* tok : tokens){
+//        delete tok;
+//    }
+//    tokens.clear();
 }
 
 void Lexer::CreateAutomata() {
@@ -42,27 +43,23 @@ void Lexer::Run(std::string& input) {
 
         //handle whitespace
         //TODO handle tabs and check if file is empty before this stuff
-        if (input[0] == '\n'){
-            //lineNumber++; This is maybe handled in the Automaton classes
-            input.erase(input.begin());
-        }
-        else if (input[0] == ' ') {
-            input.erase(input.begin());
+        while (input[0] == '\n' || input[0] == '\t' || input[0] == '\r' || input[0] == ' '){
+            if (input[0] == '\n') lineNumber++; //This is maybe handled in the Automaton classes
+            input.erase(0,1);
         }
 
         //Parallel portion
-        //for (auto eachAutomaton : automata){
         for (int i=0; i < automata.size(); i++){
-            //inputRead = eachAutomaton->Start(input);
             inputRead = automata[i]->Start(input);
             if (inputRead > maxRead) {
                 maxRead = inputRead;
-               // maxAutomaton = eachAutomaton;
-               maxAutomaton = automata[i];
+                maxAutomaton = automata[i];
+                inputRead = 0;
             }
         }
 
         //Max portion
+
         if (maxRead > 0) {
             //create substring for token creation from input string to pass into createToken()
             std::string tokString = input.substr(0,maxRead);
@@ -75,14 +72,15 @@ void Lexer::Run(std::string& input) {
         else{
             maxRead = 1;
             //create new automaton for undefined and eof to set maxAutomaton to and then call createToken on max automaton
+            std::string tokString = input.substr(0,maxRead);
             maxAutomaton = automata[automata.size()-2];
-            Token* newToken = maxAutomaton->CreateToken(input[0], lineNumber);
+            Token* newToken = maxAutomaton->CreateToken(tokString, lineNumber);
             tokens.push_back(newToken);
         }
         input.erase(0,maxRead);
     }
     maxAutomaton = automata[automata.size()-1];
-    Token* eofToken = maxAutomaton->CreateToken(input, lineNumber);
+    Token* eofToken = maxAutomaton->CreateToken("", lineNumber);
     tokens.push_back(eofToken);
     /*
     set lineNumber to 1
@@ -119,4 +117,12 @@ void Lexer::Run(std::string& input) {
     }
     add end of file token to all tokens
     */
+}
+
+std::string Lexer::toString() const {
+    std::ostringstream output;
+    for(int i = 0; i < tokens.size(); i++){
+        output << tokens[i]->toString();
+    }
+    return output.str();
 }
