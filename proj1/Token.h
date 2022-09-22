@@ -5,6 +5,7 @@
 enum class TokenType {
     COLON,
     COLON_DASH,
+    COMMENT,
     // TODO: add the other types of tokens
     UNDEFINED,
     ENDOFFILE

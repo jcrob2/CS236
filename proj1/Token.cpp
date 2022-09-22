@@ -19,6 +19,9 @@ std::string Token::toString() const {
         case TokenType::COLON_DASH:
             typeOfToken = "COLON_DASH";
             break;
+        case TokenType::COMMENT:
+            typeOfToken = "COMMENT";
+            break;
 
 
 
