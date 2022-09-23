@@ -17,6 +17,8 @@ public:
     void S3(const std::string& input);
     void S4(const std::string& input);
     void S5(const std::string& input);
+    void S6(const std::string& input);
+
 
 };
 
