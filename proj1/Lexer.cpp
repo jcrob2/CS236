@@ -4,6 +4,19 @@
 #include "UndefinedAutomaton.h"
 #include "EndOfFileAutomaton.h"
 #include "CommentAutomaton.h"
+#include "CommaAutomaton.h"
+#include "PeriodAutomaton.h"
+#include "QmarkAutomaton.h"
+#include "LeftParenAutomaton.h"
+#include "RightParenAutomaton.h"
+#include "MultiplyAutomaton.h"
+#include "AddAutomaton.h"
+#include "SchemesAutomaton.h"
+#include "FactsAutomaton.h"
+#include "RulesAutomaton.h"
+#include "QueriesAutomaton.h"
+#include "IdAutomaton.h"
+#include "StringAutomaton.h"
 #include <sstream>
 
 Lexer::Lexer() {
@@ -26,9 +39,19 @@ void Lexer::CreateAutomata() {
     automata.push_back(new ColonAutomaton());
     automata.push_back(new ColonDashAutomaton());
     automata.push_back(new CommentAutomaton());
-
-    // TODO: Add the other needed automata here
-
+    automata.push_back(new CommaAutomaton());
+    automata.push_back(new PeriodAutomaton());
+    automata.push_back(new QmarkAutomaton());
+    automata.push_back(new LeftParenAutomaton());
+    automata.push_back(new RightParenAutomaton());
+    automata.push_back(new MultiplyAutomaton());
+    automata.push_back(new AddAutomaton());
+    automata.push_back(new SchemesAutomaton());
+    automata.push_back(new FactsAutomaton());
+    automata.push_back(new RulesAutomaton());
+    automata.push_back(new QueriesAutomaton());
+    automata.push_back(new IdAutomaton());
+    automata.push_back(new StringAutomaton());
     automata.push_back(new UndefinedAutomaton());
     automata.push_back(new EndOfFileAutomaton());
 }
@@ -37,7 +60,7 @@ void Lexer::Run(std::string& input) {
     int lineNumber = 1;
 
     while (input[0] != EOF) {
-
+        if (input == "") break;
         int maxRead = 0;
         int inputRead = 0;
         maxAutomaton = automata[0];
@@ -62,7 +85,6 @@ void Lexer::Run(std::string& input) {
         }
 
         //Max portion
-
         if (maxRead > 0) {
             if (input[0] == EOF) break;
             //create substring for token creation from input string to pass into createToken()

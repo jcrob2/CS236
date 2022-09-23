@@ -5,7 +5,7 @@
 
 void CommentAutomaton::S0(const std::string& input){
     if (input[index] == '#') {
-        inputRead = 1;
+        inputRead += 1;
         index++;
         S1(input);
     }

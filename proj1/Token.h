@@ -6,7 +6,19 @@ enum class TokenType {
     COLON,
     COLON_DASH,
     COMMENT,
-    // TODO: add the other types of tokens
+    COMMA,
+    PERIOD,
+    Q_MARK,
+    LEFT_PAREN,
+    RIGHT_PAREN,
+    MULTIPLY,
+    ADD,
+    SCHEMES,
+    FACTS,
+    RULES,
+    QUERIES,
+    ID,
+    STRING,
     UNDEFINED,
     ENDOFFILE
 };
