@@ -56,7 +56,7 @@ void Lexer::CreateAutomata() {
     automata.push_back(new EndOfFileAutomaton());
 }
 
-void Lexer::Run(std::string& input) {
+std::vector<Token*> Lexer::Run(std::string& input) {
     int lineNumber = 1;
 
     while (input[0] != EOF) {
@@ -113,6 +113,8 @@ void Lexer::Run(std::string& input) {
     maxAutomaton = automata[automata.size()-1];
     Token* eofToken = maxAutomaton->CreateToken("", lineNumber);
     tokens.push_back(eofToken);
+
+    return tokens;
 }
 
 std::string Lexer::toString() const {

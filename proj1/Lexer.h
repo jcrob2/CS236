@@ -18,7 +18,7 @@ public:
     Lexer();
     ~Lexer();
 
-    void Run(std::string& input);
+    std::vector<Token*> Run(std::string& input);
     Automaton* maxAutomaton;
 
     std::string toString() const;

@@ -1,4 +1,5 @@
 #include "Lexer.h"
+#include "Parser.h"
 #include <string>
 #include <iostream>
 #include <sstream>
@@ -21,9 +22,12 @@ int main(int argc, char** argv) {
 
     //create and run the lexer
     Lexer* lexer = new Lexer();
-    lexer->Run(input);
+    //lexer->Run(input);
+    // std::cout << *lexer;
+    std::vector<Token*> lexOut = lexer->Run(input);
+    Parser* parser = new Parser();
+    parser->Parse(lexOut);
 
-    std::cout << *lexer;
 
 
     delete lexer;
