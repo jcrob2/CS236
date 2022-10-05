@@ -91,7 +91,11 @@ void Lexer::Run(std::string& input) {
             std::string tokString = input.substr(0,maxRead);
             Token* newToken = maxAutomaton->CreateToken(tokString, lineNumber);
             lineNumber += maxAutomaton->NewLinesRead();
-            tokens.push_back(newToken);
+
+            //Screen out comments as we don't care about them at all for lab 2
+            if (newToken->getType() != TokenType::COMMENT) {
+                tokens.push_back(newToken);
+            }
         }
 
         else{
@@ -105,10 +109,10 @@ void Lexer::Run(std::string& input) {
         }
         input.erase(0,maxRead);
     }
+    //create new EOF token to add to token vector
     maxAutomaton = automata[automata.size()-1];
     Token* eofToken = maxAutomaton->CreateToken("", lineNumber);
     tokens.push_back(eofToken);
-
 }
 
 std::string Lexer::toString() const {

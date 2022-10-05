@@ -40,6 +40,8 @@ public:
         os << token.toString();
         return os;
     }
+
+    TokenType getType() { return type;}
     // TODO: add other needed methods
 };
 

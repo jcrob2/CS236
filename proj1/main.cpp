@@ -1,6 +1,7 @@
 #include "Lexer.h"
 #include <string>
 #include <iostream>
+#include <sstream>
 #include <fstream>
 
 int main(int argc, char** argv) {
@@ -18,12 +19,12 @@ int main(int argc, char** argv) {
     }
     in.close();
 
-
-
-
+    //create and run the lexer
     Lexer* lexer = new Lexer();
     lexer->Run(input);
+
     std::cout << *lexer;
+
 
     delete lexer;
 
