@@ -23,9 +23,10 @@ int main(int argc, char** argv) {
     //create and run the lexer
     Lexer* lexer = new Lexer();
     //lexer->Run(input);
-    // std::cout << *lexer;
+    //std::cout << *lexer;
     std::vector<Token*> lexOut = lexer->Run(input);
-    Parser* parser = new Parser();
+    //std::cout << *lexer;
+    Parser* parser = new Parser(lexOut);
     parser->Parse(lexOut);
 
 

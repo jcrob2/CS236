@@ -10,27 +10,56 @@
 
 class Parser {
 private:
+    int index;
+    std::vector<Token*> parseTokens;
 public:
-    Parser(){}
+    Parser() {}
+    Parser(std::vector<Token*> lexOut){
+        index = 0;
+        parseTokens = lexOut;
+    }
     ~Parser(){}
 
+    bool match(TokenType tokType);
+
+    //NonTerminal parsing functions
     DatalogProgram Parse(std::vector<Token*> input);
-    void parseDatalogProgram();
-    void parseSchemeList();
-    void parseFactList();
-    void parseRuleList();
-    void parseQueryList();
-    void parseScheme();
-    void parseFact();
-    void parseRule();
-    void parseQuery();
-    void parseHeadPredicate();
-    void parsePredicate();
-    void parsePredicateList();
-    void parseParameterList();
-    void parseStringList();
-    void parseIdList();
-    void parseParameter();
+    void parseDatalogProgram(std::vector<Token*> tokens);
+    void parseSchemeList(std::vector<Token*> tokens);
+    void parseFactList(std::vector<Token*> tokens);
+    void parseRuleList(std::vector<Token*> tokens);
+    void parseQueryList(std::vector<Token*> tokens);
+    void parseScheme(std::vector<Token*> tokens);
+    void parseFact(std::vector<Token*> tokens);
+    void parseRule(std::vector<Token*> tokens);
+    void parseQuery(std::vector<Token*> tokens);
+    void parseHeadPredicate(std::vector<Token*> tokens);
+    void parsePredicate(std::vector<Token*> tokens);
+    void parsePredicateList(std::vector<Token*> tokens);
+    void parseParameterList(std::vector<Token*> tokens);
+    void parseStringList(std::vector<Token*> tokens);
+    void parseIdList(std::vector<Token*> tokens);
+    void parseParameter(std::vector<Token*> tokens);
+
+    //Terminal parsing functions
+    // SCHEMES COLON FACTS RULES QUERIES ENDOFFILE ID
+    // LEFT_PAREN RIGHT_PAREN STRING PERIOD
+    // COLON_DASH Q_MARK COMMA
+    void parseSchemes(std::vector<Token*> tokens);
+    void parseColon(std::vector<Token*> tokens);
+    void parseFacts(std::vector<Token*> tokens);
+    void parseRules(std::vector<Token*> tokens);
+    void parseQueries(std::vector<Token*> tokens);
+    void parseEndOfFile(std::vector<Token*> tokens);
+    void parseId(std::vector<Token*> tokens);
+    void parseLeftParen(std::vector<Token*> tokens);
+    void parseRightParen(std::vector<Token*> tokens);
+    void parseString(std::vector<Token*> tokens);
+    void parsePeriod(std::vector<Token*> tokens);
+    void parseColonDash(std::vector<Token*> tokens);
+    void parseQMark(std::vector<Token*> tokens);
+    void parseComma(std::vector<Token*> tokens);
+
 
     std::string toString() const;
     friend std::ostream& operator<< (std::ostream& os, const Parser& p){
