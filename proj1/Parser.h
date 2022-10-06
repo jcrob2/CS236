@@ -23,7 +23,7 @@ public:
     bool match(TokenType tokType);
 
     //NonTerminal parsing functions
-    DatalogProgram Parse(std::vector<Token*> input);
+    DatalogProgram Parse();
     void parseDatalogProgram(std::vector<Token*> tokens);
     void parseSchemeList(std::vector<Token*> tokens);
     void parseFactList(std::vector<Token*> tokens);
@@ -39,7 +39,7 @@ public:
     void parseParameterList(std::vector<Token*> tokens);
     void parseStringList(std::vector<Token*> tokens);
     void parseIdList(std::vector<Token*> tokens);
-    void parseParameter(std::vector<Token*> tokens);
+    Parameter* parseParameter(std::vector<Token*> tokens);
 
     //Terminal parsing functions
     // SCHEMES COLON FACTS RULES QUERIES ENDOFFILE ID
@@ -51,7 +51,7 @@ public:
     void parseRules(std::vector<Token*> tokens);
     void parseQueries(std::vector<Token*> tokens);
     void parseEndOfFile(std::vector<Token*> tokens);
-    void parseId(std::vector<Token*> tokens);
+    std::string parseId(std::vector<Token*> tokens);
     void parseLeftParen(std::vector<Token*> tokens);
     void parseRightParen(std::vector<Token*> tokens);
     void parseString(std::vector<Token*> tokens);

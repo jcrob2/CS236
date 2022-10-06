@@ -42,6 +42,7 @@ public:
     }
 
     TokenType getType() { return type;}
+    std::string getDescription(){ return description; }
     // TODO: add other needed methods
 };
 

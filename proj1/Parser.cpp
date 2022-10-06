@@ -2,45 +2,43 @@
 
 bool Parser::match(TokenType tokType) {
     if (parseTokens[index]->getType() == tokType){
-        //TODO: implement popping of the front of the vector in a different ParseTerminal function
-        //parseTokens.erase(parseTokens.begin());
         return true;
     }
     else {
-        Token* errTok = parseTokens[index+1];
-        throw errTok;
+        return false;
     }
 }
 
-DatalogProgram Parser::Parse(std::vector<Token *> input) {
+DatalogProgram Parser::Parse() {
     try {
         parseDatalogProgram(parseTokens);
+        std::cout << "Success!" << std::endl;
     } catch (Token* error) {
         std::cout << "Failure!" << std::endl;
         std::cout << "  " << *error;
     }
-    std::cout << "Success!" << std::endl;
+
 }
 
 //Non-Terminal parsing functions
 void Parser::parseDatalogProgram(std::vector<Token*> tokens) {
     //SCHEMES == First set of DatalogProgram
     if (match(TokenType::SCHEMES)) {
-        match(TokenType::SCHEMES);
-        match(TokenType::COLON);
+        parseSchemes(tokens);
+        parseColon(tokens);
         parseScheme(tokens);
         parseSchemeList(tokens);
-        match(TokenType::FACTS);
-        match(TokenType::COLON);
+        parseFacts(tokens);
+        parseColon(tokens);
         parseFactList(tokens);
-        match(TokenType::RULES);
-        match(TokenType::COLON);
+        parseRules(tokens);
+        parseColon(tokens);
         parseRuleList(tokens);
-        match(TokenType::QUERIES);
-        match(TokenType::COLON);
+        parseQueries(tokens);
+        parseColon(tokens);
         parseQuery(tokens);
         parseQueryList(tokens);
-        match(TokenType::ENDOFFILE);
+        parseEndOfFile(tokens);
     }
     else{
         Token* errToken = tokens[index];
@@ -107,50 +105,79 @@ void Parser::parseQueryList(std::vector<Token *> tokens) {
         throw errToken;
     }
 }
+
 void Parser::parseScheme(std::vector<Token *> tokens) {
-    match(TokenType::ID);
-    match(TokenType::LEFT_PAREN);
-    match(TokenType::ID);
-    parseIdList(tokens);
-    match(TokenType::RIGHT_PAREN);
+    if (match(TokenType::ID)) {
+        parseId(tokens);
+        parseLeftParen(tokens);
+        parseId(tokens);
+        parseIdList(tokens);
+        parseRightParen(tokens);
+    }
+    else {
+        Token* errToken = tokens[index];
+        throw errToken;
+    }
 }
 void Parser::parseFact(std::vector<Token *> tokens) {
-    match(TokenType::ID);
-    match(TokenType::LEFT_PAREN);
-    match(TokenType::STRING);
-    parseStringList(tokens);
-    match(TokenType::RIGHT_PAREN);
-    match(TokenType::PERIOD);
+    if (match(TokenType::ID)) {
+        parseId(tokens);
+        parseLeftParen(tokens);
+        parseString(tokens);
+        parseStringList(tokens);
+        parseRightParen(tokens);
+        parsePeriod(tokens);
+    }
+    else {
+        Token* errToken = tokens[index];
+        throw errToken;
+    }
 }
 void Parser::parseRule(std::vector<Token *> tokens) {
-    parseHeadPredicate(tokens);
-    match(TokenType::COLON_DASH);
-    parsePredicate(tokens);
-    parsePredicateList(tokens);
-    match(TokenType::PERIOD);
+    if (match(TokenType::ID)) {
+        parseHeadPredicate(tokens);
+        parseColonDash(tokens);
+        parsePredicate(tokens);
+        parsePredicateList(tokens);
+        parsePeriod(tokens);
+    }
+    else {
+        Token* errToken = tokens[index];
+        throw errToken;
+    }
 }
 void Parser::parseQuery(std::vector<Token *> tokens) {
-    parsePredicate(tokens);
-    match(TokenType::Q_MARK);
+    if(match(TokenType::ID)) {
+        parsePredicate(tokens);
+        parseQMark(tokens);
+    }
+    else {
+        Token* errToken = tokens[index];
+        throw errToken;
+    }
 }
+
 void Parser::parseHeadPredicate(std::vector<Token *> tokens) {
-    match(TokenType::ID);
-    match(TokenType::LEFT_PAREN);
-    match(TokenType::ID);
-    parseIdList(tokens);
-    match(TokenType::RIGHT_PAREN);
+    if (match(TokenType::ID)) {
+        parseId(tokens);
+        parseLeftParen(tokens);
+        parseId(tokens);
+        parseIdList(tokens);
+        parseRightParen(tokens);
+    }
 }
 void Parser::parsePredicate(std::vector<Token *> tokens) {
-    match(TokenType::ID);
-    match(TokenType::LEFT_PAREN);
+    std::string id = parseId(tokens);
+    parseLeftParen(tokens);
     parseParameter(tokens);
     parseParameterList(tokens);
-    match(TokenType::RIGHT_PAREN);
+    parseRightParen(tokens);
 }
+
 void Parser::parsePredicateList(std::vector<Token *> tokens) {
     //COMMA == FIRST set of PredicateList
     if(match(TokenType::COMMA)){
-        match(TokenType::COMMA);
+        parseComma(tokens);
         parsePredicate(tokens);
         parsePredicateList(tokens);
     }
@@ -166,7 +193,7 @@ void Parser::parsePredicateList(std::vector<Token *> tokens) {
 void Parser::parseParameterList(std::vector<Token *> tokens) {
     //COMMA == FIRST set of ParameterList
     if(match(TokenType::COMMA)){
-        match(TokenType::COMMA);
+        parseComma(tokens);
         parseParameter(tokens);
         parseParameterList(tokens);
     }
@@ -182,8 +209,8 @@ void Parser::parseParameterList(std::vector<Token *> tokens) {
 void Parser::parseStringList(std::vector<Token *> tokens) {
     //COMMA == FIRST set of StringList
     if(match(TokenType::COMMA)) {
-        match(TokenType::COMMA);
-        match(TokenType::STRING);
+        parseComma(tokens);
+        parseString(tokens);
         parseStringList(tokens);
     }
     //RIGHT_PAREN == FOLLOW set of StringList
@@ -198,8 +225,11 @@ void Parser::parseStringList(std::vector<Token *> tokens) {
 void Parser::parseIdList(std::vector<Token *> tokens) {
     //COMMA == FIRST set of IdList
     if(match(TokenType::COMMA)) {
-        match(TokenType::COMMA);
-        match(TokenType::ID);
+        parseComma(tokens);
+
+
+
+        parseId(tokens);
         parseIdList(tokens);
     }
     //RIGHT_PAREN == FOLLOW set of IdList
@@ -211,12 +241,16 @@ void Parser::parseIdList(std::vector<Token *> tokens) {
         throw errToken;
     }
 }
-void Parser::parseParameter(std::vector<Token *> tokens) {
+Parameter* Parser::parseParameter(std::vector<Token *> tokens) {
     if(match(TokenType::STRING)){
-        match(TokenType::STRING);
+        Parameter* para = new Parameter(tokens[index]->getDescription());
+        parseString(tokens);
+        return para;
     }
     else if (match(TokenType::ID)){
-        match(TokenType::ID);
+        Parameter* para = new Parameter(tokens[index]->getDescription());
+        parseId(tokens);
+        return para;
     }
     else{
         Token* errToken = tokens[index];
@@ -226,6 +260,8 @@ void Parser::parseParameter(std::vector<Token *> tokens) {
 
 
 //Terminal parsing functions
+//TODO: maybe implement popping of the front of the vector
+//parseTokens.erase(parseTokens.begin());
 void Parser::parseSchemes(std::vector<Token*> tokens){
     if (tokens[index]->getType() == TokenType::SCHEMES){
         index++;
@@ -280,9 +316,11 @@ void Parser::parseEndOfFile(std::vector<Token*> tokens){
         throw errToken;
     }
 }
-void Parser::parseId(std::vector<Token*> tokens){
+std::string Parser::parseId(std::vector<Token*> tokens){
     if (tokens[index]->getType() == TokenType::ID){
+        std::string id = tokens[index]->getDescription();
         index++;
+        return id;
     }
     else{
         Token* errToken = tokens[index];

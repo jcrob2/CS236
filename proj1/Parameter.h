@@ -3,6 +3,13 @@
 #include <string>
 
 class Parameter {
+private:
+    std::string parameter;
+public:
+    Parameter(){}
+    Parameter(std::string input){
+        parameter = input;
+    }
     std::string toString() const {}
 
     friend std::ostream& operator<< (std::ostream& os, const Parameter& par){
