@@ -12,6 +12,10 @@
 
         Fix the SEGFAULTS. bucket 80, input 1 produces segfault at or before
         (PERIOD,".",37)
+                - could be from not creating a new token when I throw my error tokens
+                    ex:
+                        Token* errToken = new Token*(tokens[index]);
+                        throw errToken;
 */
 
 bool Parser::match(TokenType tokType) {

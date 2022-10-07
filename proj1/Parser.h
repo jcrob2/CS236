@@ -16,7 +16,7 @@ public:
     Parser() {}
     Parser(std::vector<Token*> lexOut){
         index = 0;
-        parseTokens = lexOut;
+        this->parseTokens = lexOut;
     }
     ~Parser(){}
 
@@ -63,11 +63,6 @@ public:
     void parseColonDash(std::vector<Token*> tokens);
     void parseQMark(std::vector<Token*> tokens);
     void parseComma(std::vector<Token*> tokens);
-
-//    friend std::ostream& operator<< (std::ostream& os, const Parser& p){
-//        os << p.toString();
-//        return os;
-//    }
 
 };
 
