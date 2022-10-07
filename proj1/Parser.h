@@ -23,7 +23,7 @@ public:
     bool match(TokenType tokType);
 
     //NonTerminal parsing functions
-    DatalogProgram Parse();
+    DatalogProgram* Parse();
     DatalogProgram* parseDatalogProgram(std::vector<Token*> tokens);
 
     void parseSchemeList(std::vector<Token*> tokens, DatalogProgram* datalogProgram);

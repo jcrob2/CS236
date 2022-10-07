@@ -20,7 +20,7 @@ bool Parser::match(TokenType tokType) {
     }
 }
 
-DatalogProgram Parser::Parse() {
+DatalogProgram* Parser::Parse() {
     try {
         DatalogProgram* datalogProgram = new DatalogProgram(parseDatalogProgram(parseTokens));
         //parseDatalogProgram(parseTokens);
@@ -30,7 +30,7 @@ DatalogProgram Parser::Parse() {
         std::cout << "Failure!" << std::endl;
         std::cout << "  " << *error;
     }
-
+    return nullptr;
 }
 
 //Non-Terminal parsing functions
@@ -212,6 +212,7 @@ Predicate* Parser::parseHeadPredicate(std::vector<Token *> tokens) {
         parseRightParen(tokens);
         return head;
     }
+    return nullptr;
 }
 Predicate* Parser::parsePredicate(std::vector<Token *> tokens) {
     Predicate* predicate = new Predicate(tokens[index]->getDescription());

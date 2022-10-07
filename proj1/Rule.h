@@ -34,9 +34,11 @@ public:
 
     std::string toString() const {
         std::ostringstream output;
+        std::string padding = "";
         output << *headPredicate << " :- ";
         for (auto p : bodyPredicates){
-            output << *p;
+            output << padding << *p;
+            padding = ",";
         }
 
         return output.str();

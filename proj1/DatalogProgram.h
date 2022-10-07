@@ -51,15 +51,15 @@ public:
         }
         output << "Facts(" << this->facts.size() << "):" << std::endl;
         for (auto p : facts){
-            output << "  " << *p << std::endl;
+            output << "  " << *p << "." << std::endl;
         }
         output << "Rules(" << this->rules.size() << "):" << std::endl;
         for (auto p : rules){
-            output << "  " << *p << std::endl;
+            output << "  " << *p << "." << std::endl;
         }
         output << "Queries(" << this->queries.size() << "):" << std::endl;
         for (auto p : queries){
-            output << "  " << *p << std::endl;
+            output << "  " << *p << "?" << std::endl;
         }
         output << "Domain(" << this->domain.size() << "):" << std::endl;
         for (auto p : domain){
