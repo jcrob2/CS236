@@ -1,5 +1,16 @@
 #include "Parser.h"
 
+//TODO: Fix 'double free or corruption (!prev)' issue. Caused by
+//      adding the Schemes and Facts Predicates into the Schemes
+//      and Facts vectors in DatalogProgram.
+//
+//      To Fix: consider making ParseScheme and ParseFact return
+//      a predicate object that is then stored in DatalogProgram
+//      in the Parse() function. This reduces the calls to
+//      DatalogProgram and cleans up the code a little, as well
+//      as reducing the free() calls. Hopefully.
+
+
 bool Parser::match(TokenType tokType) {
     if (parseTokens[index]->getType() == tokType){
         return true;
