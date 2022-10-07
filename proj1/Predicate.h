@@ -10,6 +10,14 @@ private:
     std::vector<Parameter*> parameters;
 public:
     Predicate(){}
+    Predicate(std::string in){ id = in;}
+    Predicate(std::string in, std::vector<Parameter*> vin){
+        id = in;
+        parameters = vin;
+    }
+
+    void addParameter(Parameter* p){parameters.push_back(p);}
+
     std::string toString() const {}
 
     friend std::ostream& operator<< (std::ostream& os, const Predicate& pred){

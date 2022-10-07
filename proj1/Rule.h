@@ -8,6 +8,13 @@ public:
     Predicate* headPredicate;
     std::vector<Predicate*> bodyPredicates;
 public:
+    Rule(){}
+    ~Rule(){}
+
+
+
+
+
     std::string toString() const {}
 
     friend std::ostream& operator<< (std::ostream& os, const Rule& rule){

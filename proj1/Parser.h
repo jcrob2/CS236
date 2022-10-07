@@ -24,21 +24,25 @@ public:
 
     //NonTerminal parsing functions
     DatalogProgram Parse();
-    void parseDatalogProgram(std::vector<Token*> tokens);
-    void parseSchemeList(std::vector<Token*> tokens);
-    void parseFactList(std::vector<Token*> tokens);
+    void parseDatalogProgram(std::vector<Token*> tokens, DatalogProgram* datalogProgram);
+
+    void parseSchemeList(std::vector<Token*> tokens, DatalogProgram* datalogProgram);
+    void parseFactList(std::vector<Token*> tokens, DatalogProgram* datalogProgram);
     void parseRuleList(std::vector<Token*> tokens);
     void parseQueryList(std::vector<Token*> tokens);
-    void parseScheme(std::vector<Token*> tokens);
-    void parseFact(std::vector<Token*> tokens);
+
+    void parseScheme(std::vector<Token*> tokens, DatalogProgram* datalogProgram);
+    void parseFact(std::vector<Token*> tokens, DatalogProgram* datalogProgram);
     void parseRule(std::vector<Token*> tokens);
     void parseQuery(std::vector<Token*> tokens);
+
     void parseHeadPredicate(std::vector<Token*> tokens);
     void parsePredicate(std::vector<Token*> tokens);
+
     void parsePredicateList(std::vector<Token*> tokens);
-    void parseParameterList(std::vector<Token*> tokens);
-    void parseStringList(std::vector<Token*> tokens);
-    void parseIdList(std::vector<Token*> tokens);
+    void parseParameterList(std::vector<Token*> tokens, Predicate* p);
+    void parseStringList(std::vector<Token*> tokens, Predicate* p);
+    void parseIdList(std::vector<Token*> tokens, Predicate* p);
     Parameter* parseParameter(std::vector<Token*> tokens);
 
     //Terminal parsing functions
@@ -51,10 +55,10 @@ public:
     void parseRules(std::vector<Token*> tokens);
     void parseQueries(std::vector<Token*> tokens);
     void parseEndOfFile(std::vector<Token*> tokens);
-    std::string parseId(std::vector<Token*> tokens);
+    Parameter* parseId(std::vector<Token*> tokens);
     void parseLeftParen(std::vector<Token*> tokens);
     void parseRightParen(std::vector<Token*> tokens);
-    void parseString(std::vector<Token*> tokens);
+    Parameter* parseString(std::vector<Token*> tokens);
     void parsePeriod(std::vector<Token*> tokens);
     void parseColonDash(std::vector<Token*> tokens);
     void parseQMark(std::vector<Token*> tokens);
