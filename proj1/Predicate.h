@@ -15,7 +15,10 @@ public:
         id = in;
         parameters = vin;
     }
-
+    Predicate(Predicate* cp){
+        this->id = cp->id;
+        this->parameters = cp->parameters;
+    }
     void addParameter(Parameter* p){parameters.push_back(p);}
 
     std::string toString() const {}

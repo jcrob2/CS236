@@ -29,15 +29,15 @@ public:
     void parseSchemeList(std::vector<Token*> tokens, DatalogProgram* datalogProgram);
     void parseFactList(std::vector<Token*> tokens, DatalogProgram* datalogProgram);
     void parseRuleList(std::vector<Token*> tokens);
-    void parseQueryList(std::vector<Token*> tokens);
+    void parseQueryList(std::vector<Token*> tokens, DatalogProgram* datalogProgram);
 
     void parseScheme(std::vector<Token*> tokens, DatalogProgram* datalogProgram);
     void parseFact(std::vector<Token*> tokens, DatalogProgram* datalogProgram);
     void parseRule(std::vector<Token*> tokens);
-    void parseQuery(std::vector<Token*> tokens);
+    void parseQuery(std::vector<Token*> tokens, DatalogProgram* datalogProgram);
 
     void parseHeadPredicate(std::vector<Token*> tokens);
-    void parsePredicate(std::vector<Token*> tokens);
+    Predicate* parsePredicate(std::vector<Token*> tokens);
 
     void parsePredicateList(std::vector<Token*> tokens);
     void parseParameterList(std::vector<Token*> tokens, Predicate* p);

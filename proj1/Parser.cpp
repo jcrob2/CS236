@@ -4,7 +4,7 @@
 //      adding the Schemes and Facts Predicates into the Schemes
 //      and Facts vectors in DatalogProgram.
 //
-//      To Fix: consider making ParseScheme and ParseFact return
+//      To Fix: consider making ParseScheme, ParseFact and ParseQuery return
 //      a predicate object that is then stored in DatalogProgram
 //      in the Parse() function. This reduces the calls to
 //      DatalogProgram and cleans up the code a little, as well
@@ -48,8 +48,8 @@ void Parser::parseDatalogProgram(std::vector<Token*> tokens, DatalogProgram* dat
         parseRuleList(tokens);
         parseQueries(tokens);
         parseColon(tokens);
-        parseQuery(tokens);
-        parseQueryList(tokens);
+        parseQuery(tokens, datalogProgram);
+        parseQueryList(tokens, datalogProgram);
         parseEndOfFile(tokens);
     }
     else{
@@ -57,6 +57,7 @@ void Parser::parseDatalogProgram(std::vector<Token*> tokens, DatalogProgram* dat
         throw errToken;
     }
 }
+
 void Parser::parseSchemeList(std::vector<Token*> tokens, DatalogProgram* datalogProgram) {
     //ID == first set of SchemeList
     if(match(TokenType::ID)){
@@ -102,11 +103,11 @@ void Parser::parseRuleList(std::vector<Token *> tokens) {
         throw errToken;
     }
 }
-void Parser::parseQueryList(std::vector<Token *> tokens) {
+void Parser::parseQueryList(std::vector<Token *> tokens, DatalogProgram* datalogProgram) {
     //ID == FIRST set of QueryList
     if(match(TokenType::ID)){
-        parseQuery(tokens);
-        parseQueryList(tokens);
+        parseQuery(tokens, datalogProgram);
+        parseQueryList(tokens, datalogProgram);
     }
     //ENDOFFILE == FOLLOW set of QueryList
     else if (match(TokenType::ENDOFFILE)){
@@ -173,9 +174,11 @@ void Parser::parseRule(std::vector<Token *> tokens) {
         throw errToken;
     }
 }
-void Parser::parseQuery(std::vector<Token *> tokens) {
+void Parser::parseQuery(std::vector<Token *> tokens, DatalogProgram* datalogProgram) {
     if(match(TokenType::ID)) {
-        parsePredicate(tokens);
+
+        Predicate* queryPredicate = new Predicate(parsePredicate(tokens));
+        datalogProgram->setQueries(queryPredicate);
         parseQMark(tokens);
     }
     else {
@@ -199,7 +202,7 @@ void Parser::parseHeadPredicate(std::vector<Token *> tokens) {
         parseRightParen(tokens);
     }
 }
-void Parser::parsePredicate(std::vector<Token *> tokens) {
+Predicate* Parser::parsePredicate(std::vector<Token *> tokens) {
     Predicate* predicate = new Predicate(tokens[index]->getDescription());
 
     //parse predicate ID
@@ -211,6 +214,8 @@ void Parser::parsePredicate(std::vector<Token *> tokens) {
 
     parseParameterList(tokens, predicate);
     parseRightParen(tokens);
+
+    return predicate;
 }
 
 void Parser::parsePredicateList(std::vector<Token *> tokens) {
