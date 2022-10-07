@@ -68,6 +68,7 @@ public:
 
         return output.str();
     }
+
     friend std::ostream& operator<< (std::ostream& os, const DatalogProgram& dp){
         os << dp.toString();
         return os;
