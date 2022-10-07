@@ -1,6 +1,9 @@
 #ifndef PROJ1_RULE_H
 #define PROJ1_RULE_H
 #include "Predicate.h"
+#include <vector>
+#include <iostream>
+#include <sstream>
 
 
 class Rule {
@@ -29,7 +32,15 @@ public:
 
 
 
-    std::string toString() const {}
+    std::string toString() const {
+        std::ostringstream output;
+        output << *headPredicate << " :- ";
+        for (auto p : bodyPredicates){
+            output << *p;
+        }
+
+        return output.str();
+    }
 
     friend std::ostream& operator<< (std::ostream& os, const Rule& rule){
         os << rule.toString();

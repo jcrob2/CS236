@@ -53,6 +53,7 @@ DatalogProgram* Parser::parseDatalogProgram(std::vector<Token*> tokens) {
         parseQuery(tokens, datalogProgram);
         parseQueryList(tokens, datalogProgram);
         parseEndOfFile(tokens);
+        datalogProgram->setDomain();
 
         return datalogProgram;
     }
@@ -322,8 +323,6 @@ Parameter* Parser::parseParameter(std::vector<Token *> tokens) {
 
 
 //Terminal parsing functions
-//TODO: maybe implement popping of the front of the vector
-//parseTokens.erase(parseTokens.begin());
 void Parser::parseSchemes(std::vector<Token*> tokens){
     if (tokens[index]->getType() == TokenType::SCHEMES){
         index++;
@@ -454,3 +453,4 @@ Parameter* Parser::parseId(std::vector<Token*> tokens){
         throw errToken;
     }
 }
+

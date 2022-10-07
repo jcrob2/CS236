@@ -29,6 +29,7 @@ int main(int argc, char** argv) {
     Parser* parser = new Parser(lexOut);
     DatalogProgram* dp = new DatalogProgram(parser->Parse());
 
+    std::cout << *dp;
 
     delete parser;
     delete lexer;

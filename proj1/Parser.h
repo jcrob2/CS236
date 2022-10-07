@@ -64,12 +64,10 @@ public:
     void parseQMark(std::vector<Token*> tokens);
     void parseComma(std::vector<Token*> tokens);
 
-
-    std::string toString() const;
-    friend std::ostream& operator<< (std::ostream& os, const Parser& p){
-        os << p.toString();
-        return os;
-    }
+//    friend std::ostream& operator<< (std::ostream& os, const Parser& p){
+//        os << p.toString();
+//        return os;
+//    }
 
 };
 
