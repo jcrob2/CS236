@@ -3,13 +3,16 @@
 //TODO: Fix 'double free or corruption (!prev)' issue. Caused by
 //      adding the Schemes and Facts Predicates into the Schemes
 //      and Facts vectors in DatalogProgram.
-//
-//      To Fix: consider making ParseScheme, ParseFact and ParseQuery return
-//      a predicate object that is then stored in DatalogProgram
-//      in the Parse() function. This reduces the calls to
-//      DatalogProgram and cleans up the code a little, as well
-//      as reducing the free() calls. Hopefully.
+/*
+        To Fix: consider making ParseScheme, ParseFact and ParseQuery return
+        a predicate object that is then stored in DatalogProgram
+        in the Parse() function. This reduces the calls to
+        DatalogProgram and cleans up the code a little, as well
+        as reducing the free() calls. Hopefully.
 
+        Fix the SEGFAULTS. bucket 80, input 1 produces segfault at or before
+        (PERIOD,".",37)
+*/
 
 bool Parser::match(TokenType tokType) {
     if (parseTokens[index]->getType() == tokType){
