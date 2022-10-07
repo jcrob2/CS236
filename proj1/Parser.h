@@ -24,22 +24,22 @@ public:
 
     //NonTerminal parsing functions
     DatalogProgram Parse();
-    void parseDatalogProgram(std::vector<Token*> tokens, DatalogProgram* datalogProgram);
+    DatalogProgram* parseDatalogProgram(std::vector<Token*> tokens);
 
     void parseSchemeList(std::vector<Token*> tokens, DatalogProgram* datalogProgram);
     void parseFactList(std::vector<Token*> tokens, DatalogProgram* datalogProgram);
-    void parseRuleList(std::vector<Token*> tokens);
+    void parseRuleList(std::vector<Token*> tokens, DatalogProgram* datalogProgram);
     void parseQueryList(std::vector<Token*> tokens, DatalogProgram* datalogProgram);
 
     void parseScheme(std::vector<Token*> tokens, DatalogProgram* datalogProgram);
     void parseFact(std::vector<Token*> tokens, DatalogProgram* datalogProgram);
-    void parseRule(std::vector<Token*> tokens);
+    void parseRule(std::vector<Token*> tokens, DatalogProgram* datalogProgram);
     void parseQuery(std::vector<Token*> tokens, DatalogProgram* datalogProgram);
 
-    void parseHeadPredicate(std::vector<Token*> tokens);
+    Predicate* parseHeadPredicate(std::vector<Token*> tokens);
     Predicate* parsePredicate(std::vector<Token*> tokens);
 
-    void parsePredicateList(std::vector<Token*> tokens);
+    void parsePredicateList(std::vector<Token*> tokens, Rule* r);
     void parseParameterList(std::vector<Token*> tokens, Predicate* p);
     void parseStringList(std::vector<Token*> tokens, Predicate* p);
     void parseIdList(std::vector<Token*> tokens, Predicate* p);

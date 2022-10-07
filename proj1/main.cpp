@@ -27,7 +27,7 @@ int main(int argc, char** argv) {
     std::vector<Token*> lexOut = lexer->Run(input);
     //std::cout << *lexer;
     Parser* parser = new Parser(lexOut);
-    parser->Parse();
+    DatalogProgram* dp = new DatalogProgram(parser->Parse());
 
 
     delete parser;

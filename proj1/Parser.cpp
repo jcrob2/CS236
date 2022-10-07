@@ -22,9 +22,10 @@ bool Parser::match(TokenType tokType) {
 
 DatalogProgram Parser::Parse() {
     try {
-        DatalogProgram* datalogProgram = new DatalogProgram();
-        parseDatalogProgram(parseTokens, datalogProgram);
+        DatalogProgram* datalogProgram = new DatalogProgram(parseDatalogProgram(parseTokens));
+        //parseDatalogProgram(parseTokens);
         std::cout << "Success!" << std::endl;
+        return datalogProgram;
     } catch (Token* error) {
         std::cout << "Failure!" << std::endl;
         std::cout << "  " << *error;
@@ -33,7 +34,8 @@ DatalogProgram Parser::Parse() {
 }
 
 //Non-Terminal parsing functions
-void Parser::parseDatalogProgram(std::vector<Token*> tokens, DatalogProgram* datalogProgram) {
+DatalogProgram* Parser::parseDatalogProgram(std::vector<Token*> tokens) {
+    DatalogProgram* datalogProgram = new DatalogProgram();
     //SCHEMES == First set of DatalogProgram
     if (match(TokenType::SCHEMES)) {
         parseSchemes(tokens);
@@ -45,12 +47,14 @@ void Parser::parseDatalogProgram(std::vector<Token*> tokens, DatalogProgram* dat
         parseFactList(tokens, datalogProgram);
         parseRules(tokens);
         parseColon(tokens);
-        parseRuleList(tokens);
+        parseRuleList(tokens, datalogProgram);
         parseQueries(tokens);
         parseColon(tokens);
         parseQuery(tokens, datalogProgram);
         parseQueryList(tokens, datalogProgram);
         parseEndOfFile(tokens);
+
+        return datalogProgram;
     }
     else{
         Token* errToken = tokens[index];
@@ -88,11 +92,11 @@ void Parser::parseFactList(std::vector<Token *> tokens, DatalogProgram* datalogP
         throw errToken;
     }
 }
-void Parser::parseRuleList(std::vector<Token *> tokens) {
+void Parser::parseRuleList(std::vector<Token *> tokens, DatalogProgram* datalogProgram) {
     //ID == FIRST set of RuleList
     if(match(TokenType::ID)){
-        parseRule(tokens);
-        parseRuleList(tokens);
+        parseRule(tokens, datalogProgram);
+        parseRuleList(tokens, datalogProgram);
     }
     //QUERIES == FOLLOW set of RuleList
     else if (match(TokenType::QUERIES)){
@@ -161,12 +165,17 @@ void Parser::parseFact(std::vector<Token *> tokens, DatalogProgram* datalogProgr
         throw errToken;
     }
 }
-void Parser::parseRule(std::vector<Token *> tokens) {
+void Parser::parseRule(std::vector<Token *> tokens, DatalogProgram* datalogProgram) {
     if (match(TokenType::ID)) {
-        parseHeadPredicate(tokens);
+        Rule* rulePredicate = new Rule(parseHeadPredicate(tokens));
+        datalogProgram->setRules(rulePredicate);
+        //parseHeadPredicate(tokens);
         parseColonDash(tokens);
-        parsePredicate(tokens);
-        parsePredicateList(tokens);
+
+        Predicate* temp = new Predicate(parsePredicate(tokens));
+        rulePredicate->addPredicate(temp);
+
+        parsePredicateList(tokens, rulePredicate);
         parsePeriod(tokens);
     }
     else {
@@ -187,7 +196,7 @@ void Parser::parseQuery(std::vector<Token *> tokens, DatalogProgram* datalogProg
     }
 }
 
-void Parser::parseHeadPredicate(std::vector<Token *> tokens) {
+Predicate* Parser::parseHeadPredicate(std::vector<Token *> tokens) {
     if (match(TokenType::ID)) {
         Predicate* head = new Predicate(tokens[index]->getDescription());
 
@@ -200,6 +209,7 @@ void Parser::parseHeadPredicate(std::vector<Token *> tokens) {
 
         parseIdList(tokens, head);
         parseRightParen(tokens);
+        return head;
     }
 }
 Predicate* Parser::parsePredicate(std::vector<Token *> tokens) {
@@ -218,12 +228,14 @@ Predicate* Parser::parsePredicate(std::vector<Token *> tokens) {
     return predicate;
 }
 
-void Parser::parsePredicateList(std::vector<Token *> tokens) {
+void Parser::parsePredicateList(std::vector<Token *> tokens, Rule* r) {
     //COMMA == FIRST set of PredicateList
     if(match(TokenType::COMMA)){
         parseComma(tokens);
-        parsePredicate(tokens);
-        parsePredicateList(tokens);
+        Predicate* temp = new Predicate(parsePredicate(tokens));
+        r->addPredicate(temp);
+
+        parsePredicateList(tokens, r);
     }
     //PERIOD == FOLLOW set of PredicateList
     else if(match(TokenType::PERIOD)){
@@ -242,7 +254,7 @@ void Parser::parseParameterList(std::vector<Token *> tokens, Predicate* p) {
         Parameter* temp = parseParameter(tokens);
         p->addParameter(temp);
 
-        parseParameterList(tokens,p);
+        parseParameterList(tokens, p);
     }
     //RIGHT_PAREN == FOLLOW set of ParameterList
     else if (match(TokenType::RIGHT_PAREN)){
@@ -321,15 +333,6 @@ void Parser::parseSchemes(std::vector<Token*> tokens){
         throw errToken;
     }
 }
-void Parser::parseColon(std::vector<Token*> tokens){
-    if (tokens[index]->getType() == TokenType::COLON){
-        index++;
-    }
-    else{
-        Token* errToken = tokens[index];
-        throw errToken;
-    }
-}
 void Parser::parseFacts(std::vector<Token*> tokens){
     if (tokens[index]->getType() == TokenType::FACTS){
         index++;
@@ -357,8 +360,8 @@ void Parser::parseQueries(std::vector<Token*> tokens){
         throw errToken;
     }
 }
-void Parser::parseEndOfFile(std::vector<Token*> tokens){
-    if (tokens[index]->getType() == TokenType::ENDOFFILE){
+void Parser::parseColon(std::vector<Token*> tokens){
+    if (tokens[index]->getType() == TokenType::COLON){
         index++;
     }
     else{
@@ -366,11 +369,9 @@ void Parser::parseEndOfFile(std::vector<Token*> tokens){
         throw errToken;
     }
 }
-Parameter* Parser::parseId(std::vector<Token*> tokens){
-    if (tokens[index]->getType() == TokenType::ID){
-        Parameter* id = new Parameter(tokens[index]->getDescription());
+void Parser::parseColonDash(std::vector<Token*> tokens){
+    if (tokens[index]->getType() == TokenType::COLON_DASH){
         index++;
-        return id;
     }
     else{
         Token* errToken = tokens[index];
@@ -395,28 +396,8 @@ void Parser::parseRightParen(std::vector<Token*> tokens){
         throw errToken;
     }
 }
-Parameter* Parser::parseString(std::vector<Token*> tokens){
-    if (tokens[index]->getType() == TokenType::STRING){
-        Parameter* s = new Parameter(tokens[index]->getDescription());
-        index++;
-        return s;
-    }
-    else{
-        Token* errToken = tokens[index];
-        throw errToken;
-    }
-}
 void Parser::parsePeriod(std::vector<Token*> tokens){
     if (tokens[index]->getType() == TokenType::PERIOD){
-        index++;
-    }
-    else{
-        Token* errToken = tokens[index];
-        throw errToken;
-    }
-}
-void Parser::parseColonDash(std::vector<Token*> tokens){
-    if (tokens[index]->getType() == TokenType::COLON_DASH){
         index++;
     }
     else{
@@ -436,6 +417,37 @@ void Parser::parseQMark(std::vector<Token*> tokens){
 void Parser::parseComma(std::vector<Token*> tokens){
     if (tokens[index]->getType() == TokenType::COMMA){
         index++;
+    }
+    else{
+        Token* errToken = tokens[index];
+        throw errToken;
+    }
+}
+void Parser::parseEndOfFile(std::vector<Token*> tokens){
+    if (tokens[index]->getType() == TokenType::ENDOFFILE){
+        index++;
+    }
+    else{
+        Token* errToken = tokens[index];
+        throw errToken;
+    }
+}
+Parameter* Parser::parseString(std::vector<Token*> tokens){
+    if (tokens[index]->getType() == TokenType::STRING){
+        Parameter* s = new Parameter(tokens[index]->getDescription());
+        index++;
+        return s;
+    }
+    else{
+        Token* errToken = tokens[index];
+        throw errToken;
+    }
+}
+Parameter* Parser::parseId(std::vector<Token*> tokens){
+    if (tokens[index]->getType() == TokenType::ID){
+        Parameter* id = new Parameter(tokens[index]->getDescription());
+        index++;
+        return id;
     }
     else{
         Token* errToken = tokens[index];

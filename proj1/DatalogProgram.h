@@ -11,6 +11,14 @@ private:
     std::vector<Predicate*> queries;
     std::vector<Rule*> rules;
 public:
+    DatalogProgram(DatalogProgram* dp){
+        this->schemes = dp->schemes;
+        this->facts = dp->facts;
+        this->queries = dp->queries;
+        this->rules = dp->rules;
+    }
+
+    DatalogProgram(){}
     std::string toString() const {}
 
     std::vector<Predicate*> getSchemes(){ return schemes;}

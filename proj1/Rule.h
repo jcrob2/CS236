@@ -9,9 +9,23 @@ public:
     std::vector<Predicate*> bodyPredicates;
 public:
     Rule(){}
+    Rule(Predicate* ch){
+        this->headPredicate = ch;
+    }
+    Rule(Predicate* ch, std::vector<Predicate*> cv){
+        this->headPredicate = ch;
+        this->bodyPredicates = cv;
+    }
+    Rule(Rule* cr){
+        this->headPredicate = cr->headPredicate;
+        this->bodyPredicates = cr->bodyPredicates;
+    }
+
     ~Rule(){}
 
-
+    void addPredicate(Predicate* pin){
+        this->bodyPredicates.push_back(pin);
+    }
 
 
 
