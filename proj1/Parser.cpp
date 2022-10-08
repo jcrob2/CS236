@@ -65,7 +65,7 @@ DatalogProgram* Parser::parseDatalogProgram(std::vector<Token*> tokens) {
         return datalogProgram;
     }
     else{
-        Token* errToken = tokens[index];
+        Token* errToken = new Token(tokens[index]);
         throw errToken;
     }
 }
@@ -81,7 +81,7 @@ void Parser::parseSchemeList(std::vector<Token*> tokens, DatalogProgram* datalog
         //lambda
     }
     else{
-        Token* errToken = tokens[index];
+        Token* errToken = new Token(tokens[index]);
         throw errToken;
     }
 }
@@ -96,7 +96,7 @@ void Parser::parseFactList(std::vector<Token *> tokens, DatalogProgram* datalogP
         //lambda
     }
     else{
-        Token* errToken = tokens[index];
+        Token* errToken = new Token(tokens[index]);
         throw errToken;
     }
 }
@@ -111,7 +111,7 @@ void Parser::parseRuleList(std::vector<Token *> tokens, DatalogProgram* datalogP
         //lambda
     }
     else{
-        Token* errToken = tokens[index];
+        Token* errToken = new Token(tokens[index]);
         throw errToken;
     }
 }
@@ -126,7 +126,7 @@ void Parser::parseQueryList(std::vector<Token *> tokens, DatalogProgram* datalog
         //lambda
     }
     else{
-        Token* errToken = tokens[index];
+        Token* errToken = new Token(tokens[index]);
         throw errToken;
     }
 }
@@ -147,7 +147,7 @@ void Parser::parseScheme(std::vector<Token *> tokens, DatalogProgram* datalogPro
         parseRightParen(tokens);
     }
     else {
-        Token* errToken = tokens[index];
+        Token* errToken = new Token(tokens[index]);
         throw errToken;
     }
 }
@@ -169,7 +169,7 @@ void Parser::parseFact(std::vector<Token *> tokens, DatalogProgram* datalogProgr
 
     }
     else {
-        Token* errToken = tokens[index];
+        Token* errToken = new Token(tokens[index]);
         throw errToken;
     }
 }
@@ -187,7 +187,7 @@ void Parser::parseRule(std::vector<Token *> tokens, DatalogProgram* datalogProgr
         parsePeriod(tokens);
     }
     else {
-        Token* errToken = tokens[index];
+        Token* errToken = new Token(tokens[index]);
         throw errToken;
     }
 }
@@ -199,7 +199,7 @@ void Parser::parseQuery(std::vector<Token *> tokens, DatalogProgram* datalogProg
         parseQMark(tokens);
     }
     else {
-        Token* errToken = tokens[index];
+        Token* errToken = new Token(tokens[index]);
         throw errToken;
     }
 }
@@ -251,7 +251,7 @@ void Parser::parsePredicateList(std::vector<Token *> tokens, Rule* r) {
         //lambda
     }
     else{
-        Token* errToken = tokens[index];
+        Token* errToken = new Token(tokens[index]);
         throw errToken;
     }
 }
@@ -270,7 +270,7 @@ void Parser::parseParameterList(std::vector<Token *> tokens, Predicate* p) {
         //lambda
     }
     else{
-        Token* errToken = tokens[index];
+        Token* errToken = new Token(tokens[index]);
         throw errToken;
     }
 }
@@ -289,7 +289,7 @@ void Parser::parseStringList(std::vector<Token *> tokens, Predicate* p) {
         //lambda
     }
     else{
-        Token* errToken = tokens[index];
+        Token* errToken = new Token(tokens[index]);
         throw errToken;
     }
 }
@@ -308,7 +308,7 @@ void Parser::parseIdList(std::vector<Token *> tokens, Predicate* p) {
         //lambda
     }
     else{
-        Token* errToken = tokens[index];
+        Token* errToken = new Token(tokens[index]);
         throw errToken;
     }
 }
@@ -324,7 +324,7 @@ Parameter* Parser::parseParameter(std::vector<Token *> tokens) {
         return para;
     }
     else{
-        Token* errToken = tokens[index];
+        Token* errToken = new Token(tokens[index]);
         throw errToken;
     }
 }
@@ -336,7 +336,7 @@ void Parser::parseSchemes(std::vector<Token*> tokens){
         index++;
     }
     else{
-        Token* errToken = tokens[index];
+        Token* errToken = new Token(tokens[index]);
         throw errToken;
     }
 }
@@ -345,7 +345,7 @@ void Parser::parseFacts(std::vector<Token*> tokens){
         index++;
     }
     else{
-        Token* errToken = tokens[index];
+        Token* errToken = new Token(tokens[index]);
         throw errToken;
     }
 }
@@ -354,7 +354,7 @@ void Parser::parseRules(std::vector<Token*> tokens){
         index++;
     }
     else{
-        Token* errToken = tokens[index];
+        Token* errToken = new Token(tokens[index]);
         throw errToken;
     }
 }
@@ -363,7 +363,7 @@ void Parser::parseQueries(std::vector<Token*> tokens){
         index++;
     }
     else{
-        Token* errToken = tokens[index];
+        Token* errToken = new Token(tokens[index]);
         throw errToken;
     }
 }
@@ -372,7 +372,7 @@ void Parser::parseColon(std::vector<Token*> tokens){
         index++;
     }
     else{
-        Token* errToken = tokens[index];
+        Token* errToken = new Token(tokens[index]);
         throw errToken;
     }
 }
@@ -381,7 +381,7 @@ void Parser::parseColonDash(std::vector<Token*> tokens){
         index++;
     }
     else{
-        Token* errToken = tokens[index];
+        Token* errToken = new Token(tokens[index]);
         throw errToken;
     }
 }
@@ -390,7 +390,7 @@ void Parser::parseLeftParen(std::vector<Token*> tokens){
         index++;
     }
     else{
-        Token* errToken = tokens[index];
+        Token* errToken = new Token(tokens[index]);
         throw errToken;
     }
 }
@@ -399,7 +399,7 @@ void Parser::parseRightParen(std::vector<Token*> tokens){
         index++;
     }
     else{
-        Token* errToken = tokens[index];
+        Token* errToken = new Token(tokens[index]);
         throw errToken;
     }
 }
@@ -408,8 +408,8 @@ void Parser::parsePeriod(std::vector<Token*> tokens){
         index++;
     }
     else{
-        Token* errToken = tokens[index];
-        throw errToken;
+        Token* errToken = new Token(tokens[index]);
+        throw errToken;;
     }
 }
 void Parser::parseQMark(std::vector<Token*> tokens){
@@ -417,7 +417,7 @@ void Parser::parseQMark(std::vector<Token*> tokens){
         index++;
     }
     else{
-        Token* errToken = tokens[index];
+        Token* errToken = new Token(tokens[index]);
         throw errToken;
     }
 }
@@ -426,7 +426,7 @@ void Parser::parseComma(std::vector<Token*> tokens){
         index++;
     }
     else{
-        Token* errToken = tokens[index];
+        Token* errToken = new Token(tokens[index]);
         throw errToken;
     }
 }
@@ -435,7 +435,7 @@ void Parser::parseEndOfFile(std::vector<Token*> tokens){
         index++;
     }
     else{
-        Token* errToken = tokens[index];
+        Token* errToken = new Token(tokens[index]);
         throw errToken;
     }
 }
@@ -446,7 +446,7 @@ Parameter* Parser::parseString(std::vector<Token*> tokens){
         return s;
     }
     else{
-        Token* errToken = tokens[index];
+        Token* errToken = new Token(tokens[index]);
         throw errToken;
     }
 }
@@ -457,7 +457,7 @@ Parameter* Parser::parseId(std::vector<Token*> tokens){
         return id;
     }
     else{
-        Token* errToken = tokens[index];
+        Token* errToken = new Token(tokens[index]);
         throw errToken;
     }
 }

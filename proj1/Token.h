@@ -33,7 +33,11 @@ private:
 
 public:
     Token(TokenType type, std::string description, int line);
-
+    Token(Token* cTok){
+        this->type = cTok->type;
+        this->description = cTok->description;
+        this->line = cTok->line;
+    }
     TokenType getType() { return type;}
     std::string getDescription(){ return description; }
 
