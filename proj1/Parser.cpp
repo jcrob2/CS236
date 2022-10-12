@@ -457,8 +457,9 @@ Parameter* Parser::parseId(std::vector<Token*> tokens){
         return id;
     }
     else{
-        Token* errToken = new Token(tokens[index]);
-        throw errToken;
+        //Token* errToken = new Token(tokens[index]);
+        //throw errToken;
+        throw (tokens[index]->toString());
     }
 }
 
