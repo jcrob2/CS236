@@ -1,0 +1,3 @@
+/users/guest/j/jaredcr2/CS236/proj1/cmake-build-debug/CMakeFiles/rebuild_cache.dir
+/users/guest/j/jaredcr2/CS236/proj1/cmake-build-debug/CMakeFiles/edit_cache.dir
+/users/guest/j/jaredcr2/CS236/proj1/cmake-build-debug/CMakeFiles/proj1.dir
