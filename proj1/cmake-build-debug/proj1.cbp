@@ -112,6 +112,12 @@
 		<Unit filename="/users/guest/j/jaredcr2/CS236/proj1/CommentAutomaton.h">
 			<Option target="proj1"/>
 		</Unit>
+		<Unit filename="/users/guest/j/jaredcr2/CS236/proj1/Database.cpp">
+			<Option target="proj1"/>
+		</Unit>
+		<Unit filename="/users/guest/j/jaredcr2/CS236/proj1/Database.h">
+			<Option target="proj1"/>
+		</Unit>
 		<Unit filename="/users/guest/j/jaredcr2/CS236/proj1/DatalogProgram.h">
 			<Option target="proj1"/>
 		</Unit>
@@ -127,10 +133,22 @@
 		<Unit filename="/users/guest/j/jaredcr2/CS236/proj1/FactsAutomaton.h">
 			<Option target="proj1"/>
 		</Unit>
+		<Unit filename="/users/guest/j/jaredcr2/CS236/proj1/Header.cpp">
+			<Option target="proj1"/>
+		</Unit>
+		<Unit filename="/users/guest/j/jaredcr2/CS236/proj1/Header.h">
+			<Option target="proj1"/>
+		</Unit>
 		<Unit filename="/users/guest/j/jaredcr2/CS236/proj1/IdAutomaton.cpp">
 			<Option target="proj1"/>
 		</Unit>
 		<Unit filename="/users/guest/j/jaredcr2/CS236/proj1/IdAutomaton.h">
+			<Option target="proj1"/>
+		</Unit>
+		<Unit filename="/users/guest/j/jaredcr2/CS236/proj1/Interpreter.cpp">
+			<Option target="proj1"/>
+		</Unit>
+		<Unit filename="/users/guest/j/jaredcr2/CS236/proj1/Interpreter.h">
 			<Option target="proj1"/>
 		</Unit>
 		<Unit filename="/users/guest/j/jaredcr2/CS236/proj1/LeftParenAutomaton.cpp">
@@ -181,6 +199,12 @@
 		<Unit filename="/users/guest/j/jaredcr2/CS236/proj1/QueriesAutomaton.h">
 			<Option target="proj1"/>
 		</Unit>
+		<Unit filename="/users/guest/j/jaredcr2/CS236/proj1/Relation.cpp">
+			<Option target="proj1"/>
+		</Unit>
+		<Unit filename="/users/guest/j/jaredcr2/CS236/proj1/Relation.h">
+			<Option target="proj1"/>
+		</Unit>
 		<Unit filename="/users/guest/j/jaredcr2/CS236/proj1/RightParenAutomaton.cpp">
 			<Option target="proj1"/>
 		</Unit>
@@ -212,6 +236,12 @@
 			<Option target="proj1"/>
 		</Unit>
 		<Unit filename="/users/guest/j/jaredcr2/CS236/proj1/Token.h">
+			<Option target="proj1"/>
+		</Unit>
+		<Unit filename="/users/guest/j/jaredcr2/CS236/proj1/Tuple.cpp">
+			<Option target="proj1"/>
+		</Unit>
+		<Unit filename="/users/guest/j/jaredcr2/CS236/proj1/Tuple.h">
 			<Option target="proj1"/>
 		</Unit>
 		<Unit filename="/users/guest/j/jaredcr2/CS236/proj1/UndefinedAutomaton.cpp">

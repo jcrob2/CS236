@@ -46,4 +46,13 @@ add_executable(proj1
         Predicate.h
         Parameter.h
         Parser.cpp
-        Parser.h)
+        Parser.h
+        Tuple.cpp
+        Tuple.h
+        Header.cpp
+        Header.h
+        Relation.cpp
+        Relation.h
+        Database.cpp
+        Database.h
+        Interpreter.cpp Interpreter.h)

@@ -30,14 +30,15 @@ bool Parser::match(TokenType tokType) {
 DatalogProgram* Parser::Parse() {
     try {
         DatalogProgram* datalogProgram = new DatalogProgram(parseDatalogProgram(parseTokens));
-        //parseDatalogProgram(parseTokens);
         std::cout << "Success!" << std::endl;
         return datalogProgram;
     } catch (Token* error) {
         std::cout << "Failure!" << std::endl;
         std::cout << "  " << *error;
+        DatalogProgram* errDp = new DatalogProgram();
+        return errDp;
     }
-    return nullptr;
+
 }
 
 //Non-Terminal parsing functions
@@ -219,7 +220,10 @@ Predicate* Parser::parseHeadPredicate(std::vector<Token *> tokens) {
         parseRightParen(tokens);
         return head;
     }
-    return nullptr;
+    else{
+        Token* errToken = new Token(tokens[index]);
+        throw errToken;
+    };
 }
 Predicate* Parser::parsePredicate(std::vector<Token *> tokens) {
     Predicate* predicate = new Predicate(tokens[index]->getDescription());
@@ -457,9 +461,8 @@ Parameter* Parser::parseId(std::vector<Token*> tokens){
         return id;
     }
     else{
-        //Token* errToken = new Token(tokens[index]);
-        //throw errToken;
-        throw (tokens[index]->toString());
+        Token* errToken = new Token(tokens[index]);
+        throw errToken;
     }
 }
 

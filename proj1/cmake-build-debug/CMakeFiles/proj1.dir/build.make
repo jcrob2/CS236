@@ -343,6 +343,71 @@ CMakeFiles/proj1.dir/Parser.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/proj1.dir/Parser.cpp.s"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /users/guest/j/jaredcr2/CS236/proj1/Parser.cpp -o CMakeFiles/proj1.dir/Parser.cpp.s
 
+CMakeFiles/proj1.dir/Tuple.cpp.o: CMakeFiles/proj1.dir/flags.make
+CMakeFiles/proj1.dir/Tuple.cpp.o: ../Tuple.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/users/guest/j/jaredcr2/CS236/proj1/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_23) "Building CXX object CMakeFiles/proj1.dir/Tuple.cpp.o"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/proj1.dir/Tuple.cpp.o -c /users/guest/j/jaredcr2/CS236/proj1/Tuple.cpp
+
+CMakeFiles/proj1.dir/Tuple.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/proj1.dir/Tuple.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /users/guest/j/jaredcr2/CS236/proj1/Tuple.cpp > CMakeFiles/proj1.dir/Tuple.cpp.i
+
+CMakeFiles/proj1.dir/Tuple.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/proj1.dir/Tuple.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /users/guest/j/jaredcr2/CS236/proj1/Tuple.cpp -o CMakeFiles/proj1.dir/Tuple.cpp.s
+
+CMakeFiles/proj1.dir/Header.cpp.o: CMakeFiles/proj1.dir/flags.make
+CMakeFiles/proj1.dir/Header.cpp.o: ../Header.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/users/guest/j/jaredcr2/CS236/proj1/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_24) "Building CXX object CMakeFiles/proj1.dir/Header.cpp.o"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/proj1.dir/Header.cpp.o -c /users/guest/j/jaredcr2/CS236/proj1/Header.cpp
+
+CMakeFiles/proj1.dir/Header.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/proj1.dir/Header.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /users/guest/j/jaredcr2/CS236/proj1/Header.cpp > CMakeFiles/proj1.dir/Header.cpp.i
+
+CMakeFiles/proj1.dir/Header.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/proj1.dir/Header.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /users/guest/j/jaredcr2/CS236/proj1/Header.cpp -o CMakeFiles/proj1.dir/Header.cpp.s
+
+CMakeFiles/proj1.dir/Relation.cpp.o: CMakeFiles/proj1.dir/flags.make
+CMakeFiles/proj1.dir/Relation.cpp.o: ../Relation.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/users/guest/j/jaredcr2/CS236/proj1/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_25) "Building CXX object CMakeFiles/proj1.dir/Relation.cpp.o"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/proj1.dir/Relation.cpp.o -c /users/guest/j/jaredcr2/CS236/proj1/Relation.cpp
+
+CMakeFiles/proj1.dir/Relation.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/proj1.dir/Relation.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /users/guest/j/jaredcr2/CS236/proj1/Relation.cpp > CMakeFiles/proj1.dir/Relation.cpp.i
+
+CMakeFiles/proj1.dir/Relation.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/proj1.dir/Relation.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /users/guest/j/jaredcr2/CS236/proj1/Relation.cpp -o CMakeFiles/proj1.dir/Relation.cpp.s
+
+CMakeFiles/proj1.dir/Database.cpp.o: CMakeFiles/proj1.dir/flags.make
+CMakeFiles/proj1.dir/Database.cpp.o: ../Database.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/users/guest/j/jaredcr2/CS236/proj1/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_26) "Building CXX object CMakeFiles/proj1.dir/Database.cpp.o"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/proj1.dir/Database.cpp.o -c /users/guest/j/jaredcr2/CS236/proj1/Database.cpp
+
+CMakeFiles/proj1.dir/Database.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/proj1.dir/Database.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /users/guest/j/jaredcr2/CS236/proj1/Database.cpp > CMakeFiles/proj1.dir/Database.cpp.i
+
+CMakeFiles/proj1.dir/Database.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/proj1.dir/Database.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /users/guest/j/jaredcr2/CS236/proj1/Database.cpp -o CMakeFiles/proj1.dir/Database.cpp.s
+
+CMakeFiles/proj1.dir/Interpreter.cpp.o: CMakeFiles/proj1.dir/flags.make
+CMakeFiles/proj1.dir/Interpreter.cpp.o: ../Interpreter.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/users/guest/j/jaredcr2/CS236/proj1/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_27) "Building CXX object CMakeFiles/proj1.dir/Interpreter.cpp.o"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/proj1.dir/Interpreter.cpp.o -c /users/guest/j/jaredcr2/CS236/proj1/Interpreter.cpp
+
+CMakeFiles/proj1.dir/Interpreter.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/proj1.dir/Interpreter.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /users/guest/j/jaredcr2/CS236/proj1/Interpreter.cpp > CMakeFiles/proj1.dir/Interpreter.cpp.i
+
+CMakeFiles/proj1.dir/Interpreter.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/proj1.dir/Interpreter.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /users/guest/j/jaredcr2/CS236/proj1/Interpreter.cpp -o CMakeFiles/proj1.dir/Interpreter.cpp.s
+
 # Object files for target proj1
 proj1_OBJECTS = \
 "CMakeFiles/proj1.dir/main.cpp.o" \
@@ -366,7 +431,12 @@ proj1_OBJECTS = \
 "CMakeFiles/proj1.dir/QueriesAutomaton.cpp.o" \
 "CMakeFiles/proj1.dir/IdAutomaton.cpp.o" \
 "CMakeFiles/proj1.dir/StringAutomaton.cpp.o" \
-"CMakeFiles/proj1.dir/Parser.cpp.o"
+"CMakeFiles/proj1.dir/Parser.cpp.o" \
+"CMakeFiles/proj1.dir/Tuple.cpp.o" \
+"CMakeFiles/proj1.dir/Header.cpp.o" \
+"CMakeFiles/proj1.dir/Relation.cpp.o" \
+"CMakeFiles/proj1.dir/Database.cpp.o" \
+"CMakeFiles/proj1.dir/Interpreter.cpp.o"
 
 # External object files for target proj1
 proj1_EXTERNAL_OBJECTS =
@@ -393,9 +463,14 @@ proj1: CMakeFiles/proj1.dir/QueriesAutomaton.cpp.o
 proj1: CMakeFiles/proj1.dir/IdAutomaton.cpp.o
 proj1: CMakeFiles/proj1.dir/StringAutomaton.cpp.o
 proj1: CMakeFiles/proj1.dir/Parser.cpp.o
+proj1: CMakeFiles/proj1.dir/Tuple.cpp.o
+proj1: CMakeFiles/proj1.dir/Header.cpp.o
+proj1: CMakeFiles/proj1.dir/Relation.cpp.o
+proj1: CMakeFiles/proj1.dir/Database.cpp.o
+proj1: CMakeFiles/proj1.dir/Interpreter.cpp.o
 proj1: CMakeFiles/proj1.dir/build.make
 proj1: CMakeFiles/proj1.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/users/guest/j/jaredcr2/CS236/proj1/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_23) "Linking CXX executable proj1"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/users/guest/j/jaredcr2/CS236/proj1/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_28) "Linking CXX executable proj1"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/proj1.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.

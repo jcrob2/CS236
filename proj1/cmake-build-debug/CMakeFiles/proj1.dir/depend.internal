@@ -26,6 +26,12 @@ CMakeFiles/proj1.dir/CommentAutomaton.cpp.o
  /users/guest/j/jaredcr2/CS236/proj1/CommentAutomaton.cpp
  /users/guest/j/jaredcr2/CS236/proj1/CommentAutomaton.h
  /users/guest/j/jaredcr2/CS236/proj1/Token.h
+CMakeFiles/proj1.dir/Database.cpp.o
+ /users/guest/j/jaredcr2/CS236/proj1/Database.cpp
+ /users/guest/j/jaredcr2/CS236/proj1/Database.h
+ /users/guest/j/jaredcr2/CS236/proj1/Header.h
+ /users/guest/j/jaredcr2/CS236/proj1/Relation.h
+ /users/guest/j/jaredcr2/CS236/proj1/Tuple.h
 CMakeFiles/proj1.dir/EndOfFileAutomaton.cpp.o
  /users/guest/j/jaredcr2/CS236/proj1/Automaton.h
  /users/guest/j/jaredcr2/CS236/proj1/EndOfFileAutomaton.cpp
@@ -36,6 +42,9 @@ CMakeFiles/proj1.dir/FactsAutomaton.cpp.o
  /users/guest/j/jaredcr2/CS236/proj1/FactsAutomaton.cpp
  /users/guest/j/jaredcr2/CS236/proj1/FactsAutomaton.h
  /users/guest/j/jaredcr2/CS236/proj1/Token.h
+CMakeFiles/proj1.dir/Header.cpp.o
+ /users/guest/j/jaredcr2/CS236/proj1/Header.cpp
+ /users/guest/j/jaredcr2/CS236/proj1/Header.h
 CMakeFiles/proj1.dir/IdAutomaton.cpp.o
  /users/guest/j/jaredcr2/CS236/proj1/Automaton.h
  /users/guest/j/jaredcr2/CS236/proj1/IdAutomaton.cpp
@@ -74,6 +83,14 @@ CMakeFiles/proj1.dir/MultiplyAutomaton.cpp.o
  /users/guest/j/jaredcr2/CS236/proj1/MultiplyAutomaton.cpp
  /users/guest/j/jaredcr2/CS236/proj1/MultiplyAutomaton.h
  /users/guest/j/jaredcr2/CS236/proj1/Token.h
+CMakeFiles/proj1.dir/Parser.cpp.o
+ /users/guest/j/jaredcr2/CS236/proj1/DatalogProgram.h
+ /users/guest/j/jaredcr2/CS236/proj1/Parameter.h
+ /users/guest/j/jaredcr2/CS236/proj1/Parser.cpp
+ /users/guest/j/jaredcr2/CS236/proj1/Parser.h
+ /users/guest/j/jaredcr2/CS236/proj1/Predicate.h
+ /users/guest/j/jaredcr2/CS236/proj1/Rule.h
+ /users/guest/j/jaredcr2/CS236/proj1/Token.h
 CMakeFiles/proj1.dir/PeriodAutomaton.cpp.o
  /users/guest/j/jaredcr2/CS236/proj1/Automaton.h
  /users/guest/j/jaredcr2/CS236/proj1/PeriodAutomaton.cpp
@@ -89,6 +106,11 @@ CMakeFiles/proj1.dir/QueriesAutomaton.cpp.o
  /users/guest/j/jaredcr2/CS236/proj1/QueriesAutomaton.cpp
  /users/guest/j/jaredcr2/CS236/proj1/QueriesAutomaton.h
  /users/guest/j/jaredcr2/CS236/proj1/Token.h
+CMakeFiles/proj1.dir/Relation.cpp.o
+ /users/guest/j/jaredcr2/CS236/proj1/Header.h
+ /users/guest/j/jaredcr2/CS236/proj1/Relation.cpp
+ /users/guest/j/jaredcr2/CS236/proj1/Relation.h
+ /users/guest/j/jaredcr2/CS236/proj1/Tuple.h
 CMakeFiles/proj1.dir/RightParenAutomaton.cpp.o
  /users/guest/j/jaredcr2/CS236/proj1/Automaton.h
  /users/guest/j/jaredcr2/CS236/proj1/RightParenAutomaton.cpp
@@ -112,6 +134,9 @@ CMakeFiles/proj1.dir/StringAutomaton.cpp.o
 CMakeFiles/proj1.dir/Token.cpp.o
  /users/guest/j/jaredcr2/CS236/proj1/Token.cpp
  /users/guest/j/jaredcr2/CS236/proj1/Token.h
+CMakeFiles/proj1.dir/Tuple.cpp.o
+ /users/guest/j/jaredcr2/CS236/proj1/Tuple.cpp
+ /users/guest/j/jaredcr2/CS236/proj1/Tuple.h
 CMakeFiles/proj1.dir/UndefinedAutomaton.cpp.o
  /users/guest/j/jaredcr2/CS236/proj1/Automaton.h
  /users/guest/j/jaredcr2/CS236/proj1/Token.h
@@ -119,6 +144,11 @@ CMakeFiles/proj1.dir/UndefinedAutomaton.cpp.o
  /users/guest/j/jaredcr2/CS236/proj1/UndefinedAutomaton.h
 CMakeFiles/proj1.dir/main.cpp.o
  /users/guest/j/jaredcr2/CS236/proj1/Automaton.h
+ /users/guest/j/jaredcr2/CS236/proj1/DatalogProgram.h
  /users/guest/j/jaredcr2/CS236/proj1/Lexer.h
+ /users/guest/j/jaredcr2/CS236/proj1/Parameter.h
+ /users/guest/j/jaredcr2/CS236/proj1/Parser.h
+ /users/guest/j/jaredcr2/CS236/proj1/Predicate.h
+ /users/guest/j/jaredcr2/CS236/proj1/Rule.h
  /users/guest/j/jaredcr2/CS236/proj1/Token.h
  /users/guest/j/jaredcr2/CS236/proj1/main.cpp

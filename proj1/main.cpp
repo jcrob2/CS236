@@ -1,5 +1,6 @@
 #include "Lexer.h"
 #include "Parser.h"
+#include "Interpreter.h"
 #include <string>
 #include <iostream>
 #include <sstream>
@@ -22,14 +23,14 @@ int main(int argc, char** argv) {
 
     //create and run the lexer
     Lexer* lexer = new Lexer();
-    //lexer->Run(input);
-    //std::cout << *lexer;
     std::vector<Token*> lexOut = lexer->Run(input);
-    //std::cout << *lexer;
     Parser* parser = new Parser(lexOut);
     DatalogProgram* dp = new DatalogProgram(parser->Parse());
-
-    std::cout << *dp;
+    Interpreter* interpreter = new Interpreter(dp);
+    interpreter->RunInterpreter();
+//    if (dp->getSchemes().size() >0) {
+//        std::cout << *dp;
+//    }
 
     delete parser;
     delete lexer;
