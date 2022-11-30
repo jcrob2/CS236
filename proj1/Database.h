@@ -13,7 +13,7 @@ public:
     Relation* GetRelation(std::string relationName) {return &relations.at(relationName);}
 
     //Create copy and return that ... I think it works
-    Relation GetRelationCopy(std::string relationName){
+    Relation* GetRelationCopy(std::string relationName){
         Relation* r = &relations.at(relationName);
         return new Relation(r);
     }

@@ -6,15 +6,22 @@
 class Parameter {
 private:
     std::string parameter;
+    bool isConstant;
 public:
     Parameter(){}
     Parameter(std::string input){
-        parameter = input;
+        this->parameter = input;
+    }
+    Parameter(std::string input, bool constant){
+        this->parameter = input;
+        this->isConstant = constant;
     }
 
     std::string getParameter(){return parameter;}
     void setParameter(std::string input){parameter = input;}
 
+
+    bool IsConstant(){return isConstant;}
 
     std::string toString() const {
         std::ostringstream output;

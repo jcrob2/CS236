@@ -1,23 +1,5 @@
 #include "Parser.h"
 
-//TODO: Fix 'double free or corruption (!prev)' issue. Caused by
-//      adding the Schemes and Facts Predicates into the Schemes
-//      and Facts vectors in DatalogProgram.
-/*
-        To Fix: consider making ParseScheme, ParseFact and ParseQuery return
-        a predicate object that is then stored in DatalogProgram
-        in the Parse() function. This reduces the calls to
-        DatalogProgram and cleans up the code a little, as well
-        as reducing the free() calls. Hopefully.
-
-        Fix the SEGFAULTS. bucket 80, input 1 produces segfault at or before
-        (PERIOD,".",37)
-                - could be from not creating a new token when I throw my error tokens
-                    ex:
-                        Token* errToken = new Token*(tokens[index]);
-                        throw errToken;
-*/
-
 bool Parser::match(TokenType tokType) {
     if (parseTokens[index]->getType() == tokType){
         return true;
@@ -30,7 +12,7 @@ bool Parser::match(TokenType tokType) {
 DatalogProgram* Parser::Parse() {
     try {
         DatalogProgram* datalogProgram = new DatalogProgram(parseDatalogProgram(parseTokens));
-        std::cout << "Success!" << std::endl;
+        //std::cout << "Success!" << std::endl;
         return datalogProgram;
     } catch (Token* error) {
         std::cout << "Failure!" << std::endl;
@@ -318,12 +300,12 @@ void Parser::parseIdList(std::vector<Token *> tokens, Predicate* p) {
 }
 Parameter* Parser::parseParameter(std::vector<Token *> tokens) {
     if(match(TokenType::STRING)){
-        Parameter* para = new Parameter(tokens[index]->getDescription());
+        Parameter* para = new Parameter(tokens[index]->getDescription(), true);
         parseString(tokens);
         return para;
     }
     else if (match(TokenType::ID)){
-        Parameter* para = new Parameter(tokens[index]->getDescription());
+        Parameter* para = new Parameter(tokens[index]->getDescription(), false);
         parseId(tokens);
         return para;
     }
@@ -445,7 +427,7 @@ void Parser::parseEndOfFile(std::vector<Token*> tokens){
 }
 Parameter* Parser::parseString(std::vector<Token*> tokens){
     if (tokens[index]->getType() == TokenType::STRING){
-        Parameter* s = new Parameter(tokens[index]->getDescription());
+        Parameter* s = new Parameter(tokens[index]->getDescription(), true);
         index++;
         return s;
     }
@@ -456,7 +438,7 @@ Parameter* Parser::parseString(std::vector<Token*> tokens){
 }
 Parameter* Parser::parseId(std::vector<Token*> tokens){
     if (tokens[index]->getType() == TokenType::ID){
-        Parameter* id = new Parameter(tokens[index]->getDescription());
+        Parameter* id = new Parameter(tokens[index]->getDescription(), false);
         index++;
         return id;
     }

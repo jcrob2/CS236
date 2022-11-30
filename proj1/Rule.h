@@ -30,7 +30,15 @@ public:
         this->bodyPredicates.push_back(pin);
     }
 
+    std::vector<std::string> getHeaderVals(){
+        std::vector<std::string> v;
+        for (auto const &a : this->headPredicate->getParameters()){
+            v.push_back(a->getParameter());
+        }
+        return v;
+    }
 
+    std::vector<Predicate*> getBodyPredicates(){return bodyPredicates;}
 
     std::string toString() const {
         std::ostringstream output;

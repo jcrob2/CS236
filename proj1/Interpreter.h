@@ -8,16 +8,26 @@ class Interpreter {
 public:
     Interpreter(DatalogProgram program) {
         this->program = program;
+        this->passes = 0;
     }
+
+    Relation* evaluatePredicate(Predicate* p);
+
+    void incPasses(){this->passes += 1;}
+    Relation* evalRules();
+
+
+
     void RunInterpreter();
     void InterpretSchemes();
     void InterpretFacts();
-    //voidInterpretRules(); //lab4
+    void InterpretRules(); //lab4
     void InterpretQueries();
 
 private:
     DatalogProgram program;
     Database database;
+    int passes;
 };
 
 

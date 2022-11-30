@@ -11,6 +11,9 @@
 class Tuple {
 public:
     Tuple() = default;
+    Tuple(const Tuple& t){this->rowValues = t.rowValues;}
+    std::vector<std::string> GetRowVals() {return rowValues;}
+    void AddValue(std::string s){rowValues.push_back(s);}
     Tuple(std::vector<std::string> s){this->rowValues=s;}
     bool operator< (const Tuple &rhs) const{
         return rowValues < rhs.rowValues;
