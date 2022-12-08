@@ -133,6 +133,12 @@
 		<Unit filename="/users/guest/j/jaredcr2/CS236/proj1/FactsAutomaton.h">
 			<Option target="proj1"/>
 		</Unit>
+		<Unit filename="/users/guest/j/jaredcr2/CS236/proj1/Graph.cpp">
+			<Option target="proj1"/>
+		</Unit>
+		<Unit filename="/users/guest/j/jaredcr2/CS236/proj1/Graph.h">
+			<Option target="proj1"/>
+		</Unit>
 		<Unit filename="/users/guest/j/jaredcr2/CS236/proj1/Header.cpp">
 			<Option target="proj1"/>
 		</Unit>
@@ -167,6 +173,9 @@
 			<Option target="proj1"/>
 		</Unit>
 		<Unit filename="/users/guest/j/jaredcr2/CS236/proj1/MultiplyAutomaton.h">
+			<Option target="proj1"/>
+		</Unit>
+		<Unit filename="/users/guest/j/jaredcr2/CS236/proj1/Node.h">
 			<Option target="proj1"/>
 		</Unit>
 		<Unit filename="/users/guest/j/jaredcr2/CS236/proj1/Parameter.h">

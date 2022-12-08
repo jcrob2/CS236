@@ -1,10 +1,14 @@
 #include "Interpreter.h"
+#include "Graph.h"
 #include <algorithm>
 
 void Interpreter::RunInterpreter() {
     InterpretSchemes();
     InterpretFacts();
     InterpretRules();
+
+    std::cout << std::endl << "Schemes populated after " << passes << " passes through the Rules.";
+    std::cout << std::endl << std::endl << "Query Evaluation" << std::endl;
     InterpretQueries();
 }
 
@@ -80,42 +84,18 @@ void Interpreter::InterpretFacts() {
     }
 }
 
-Relation* Interpreter::evalRules(){
-    Relation* temp;
-    for(auto const &r:program.getRules()) {
-        std::vector<Relation *> rels;
-        Relation *temp = new Relation();
-        for (auto const &p: r->getBodyPredicates()) {
-            Relation *rcp = evaluatePredicate(p);
-            rels.push_back(rcp);
-        }
-
-        for (auto const &rel: rels) {
-            temp = temp->join(rel);
-        }
-
-        std::vector<int> cols;
-        for (auto const &a: r->headPredicate->getParameters()) {
-            for (unsigned int i = 0; i < temp->GetHeader().GetColNames().size(); i++) {
-                if (temp->GetHeader().GetColNames()[i] == a->getParameter()) {
-                    cols.push_back(i);
-                }
-            }
-        }
-        temp = temp->project(cols);
-        temp = temp->rename(r->getHeaderVals());
-        temp->SetName(r->headPredicate->getId());
-    }
-    return temp;
-}
 
 //TODO FINISH THIS
 void Interpreter::InterpretRules() {
-    bool added = false;
+    /*
+    this->database.SetAdded(false);
+    if (passes == 0){
+        std::cout << "Rule Evaluation" << std:: endl;
+    }
     incPasses();
     //Relation* temp = evalRules();
-
     for(auto const &r:program.getRules()){
+        std::cout << *r << ".";
         std::vector<Relation*> rels;
         Relation* temp = new Relation();
         for (auto const &p:r->getBodyPredicates()){
@@ -139,21 +119,180 @@ void Interpreter::InterpretRules() {
         temp = temp->rename(r->getHeaderVals());
         temp->SetName(r->headPredicate->getId());
 
-        added = database.GetRelation(r->headPredicate->getId())->Union(temp);
-    }
-
-    if (!added){
-        std::cout << "Rule Evaluation" << std::endl;
-        for(auto const &r:program.getRules()) {
-            std::cout << *r << std::endl;
-            //std::cout <<
+        if (database.GetRelation(r->headPredicate->getId())->Union(temp)){
+            this->database.SetAdded(true);
+        }
+        else {
+            if (this->database.GetAdded() == true){
+                this->database.SetAdded(true);
+            }
+            else {
+                this->database.SetAdded(false);
+            }
         }
     }
-    if (added){
+
+//    if (!added){
+//        std::cout << "Rule Evaluation" << std::endl;
+//        for(auto const &r:program.getRules()) {
+//            std::cout << *r << std::endl;
+//            for (unsigned int i; i < this->newTups.size(); i++){
+//                if (newTups[i]->GetName() == r->headPredicate->getId()){
+//                    std::cout << newTups[i];
+//                }
+//            }
+//            //std::cout <<
+//        }
+//    }
+    if (this->database.GetAdded()){
         InterpretRules();
     }
 
+*/
+    Graph* forward = new Graph(program.getRules().size());
+    Graph* reverse = new Graph(program.getRules().size());
+    createAdjLists(forward, reverse);
 
+    std::vector<Node*> postOrder = DFSF(forward);
+    std::vector<std::set<Node*>> sccs = RDFSF(reverse, postOrder);
+
+    std::cout << "Dependency Graph" << std:: endl;
+    for(auto const &n:forward->GetNodes()){
+        std::cout << "R" << n.first << ":";
+        std::string buffer = "";
+        for(auto const & n2 : n.second->adjacentTo){
+            std::cout << buffer << "R" << n2->index;
+            buffer = ",";
+        }
+        std::cout << std::endl;
+    }
+    std::cout << std::endl << "Rule Evaluation" << std::endl;
+
+    for (auto const & n : sccs){
+        RunFixedPoint(n);
+    }
+}
+
+void Interpreter::RunFixedPoint(std::set<Node*> scc) {
+    this->database.SetAdded(false);
+//    if (passes == 0){
+//        std::cout << "Rule Evaluation" << std:: endl;
+//    }
+    incPasses();
+    //Relation* temp = evalRules();
+
+    if (scc.size() > 1){
+        //for ()
+    }
+
+
+
+
+
+    for(auto const &r:program.getRules()){
+        std::cout << *r << ".";
+        std::vector<Relation*> rels;
+        Relation* temp = new Relation();
+        for (auto const &p:r->getBodyPredicates()){
+            Relation* rcp = evaluatePredicate(p);
+            rels.push_back(rcp);
+        }
+
+        for (auto const &rel : rels){
+            temp = temp->join(rel);
+        }
+
+        std::vector<int> cols;
+        for (auto const & a : r->headPredicate->getParameters()){
+            for (unsigned int i = 0; i < temp->GetHeader().GetColNames().size();i++){
+                if (temp->GetHeader().GetColNames()[i] == a->getParameter()){
+                    cols.push_back(i);
+                }
+            }
+        }
+        temp = temp->project(cols);
+        temp = temp->rename(r->getHeaderVals());
+        temp->SetName(r->headPredicate->getId());
+
+        if (database.GetRelation(r->headPredicate->getId())->Union(temp)){
+            this->database.SetAdded(true);
+        }
+        else {
+            if (this->database.GetAdded() == true){
+                this->database.SetAdded(true);
+            }
+            else {
+                this->database.SetAdded(false);
+            }
+        }
+    }
+    if (this->database.GetAdded()){
+        RunFixedPoint(scc);
+    }
+
+
+}
+
+//TODO Fix weird bug in test case 2,6 where the Dependency graph is out of order
+void Interpreter::createAdjLists(Graph *F, Graph* R) {
+    for (unsigned int i = 0; i < program.getRules().size(); i++){
+        for (auto const &p : program.getRules()[i]->bodyPredicates){
+            for (unsigned int j = 0; j < program.getRules().size(); j++){
+                if (p->getId() == program.getRules()[j]->headPredicate->getId()){
+                    Node* D = F->GetNodes().at(i);
+                    Node* C = F->GetNodes().at(j);
+                    D->adjacentTo.insert(C);
+                    //F->GetNodes().at(i)->adjacentTo.insert(F->GetNodes().at(j));
+                    R->GetNodes().at(j)->adjacentTo.insert(R->GetNodes().at(i));
+                }
+            }
+        }
+    }
+}
+
+std::vector<std::set<Node*>> Interpreter::RDFSF(Graph *G, std::vector<Node*> &postOrder) {
+    std::vector<std::set<Node*>> sccs;
+    std::vector<Node*> empty;
+
+    G->markNodesUnvisited();
+    std::reverse(postOrder.begin(), postOrder.end());
+    for (auto n : postOrder){
+        n->visited = false;
+    }
+
+    for (auto n : postOrder){
+        sccs.push_back(DFS(n, empty));
+    }
+    return sccs;
+}
+
+std::vector<Node*> Interpreter::DFSF(Graph *G) {
+    std::vector<Node*> postOrder;
+    G->markNodesUnvisited();
+
+    for (auto n: G->GetNodes()){
+        DFS(n.second, postOrder);
+    }
+
+    return postOrder;
+}
+
+std::set<Node*> Interpreter::DFS(Node *N1, std::vector<Node *> &postOrder) {
+    std::set<Node*> output;
+    N1->visited = true;
+
+    for(auto n : N1->adjacentTo){
+        std::set<Node*> temp;
+        if (n->visited == false){
+            std::set<Node*> result = DFS(n, postOrder);
+            std::merge(output.begin(), output.end(), result.begin(), result.end(), std::inserter(temp, temp.begin()));
+            output = temp;
+        }
+    }
+
+    postOrder.push_back(N1);
+    output.insert(N1);
+    return output;
 }
 
 void Interpreter::InterpretQueries() {
@@ -201,5 +340,4 @@ void Interpreter::InterpretQueries() {
             std:: cout << "No" << std::endl;
         }
     }
-    int one = 1;
 }

@@ -50,6 +50,17 @@ CMakeFiles/proj1.dir/IdAutomaton.cpp.o
  /users/guest/j/jaredcr2/CS236/proj1/IdAutomaton.cpp
  /users/guest/j/jaredcr2/CS236/proj1/IdAutomaton.h
  /users/guest/j/jaredcr2/CS236/proj1/Token.h
+CMakeFiles/proj1.dir/Interpreter.cpp.o
+ /users/guest/j/jaredcr2/CS236/proj1/Database.h
+ /users/guest/j/jaredcr2/CS236/proj1/DatalogProgram.h
+ /users/guest/j/jaredcr2/CS236/proj1/Header.h
+ /users/guest/j/jaredcr2/CS236/proj1/Interpreter.cpp
+ /users/guest/j/jaredcr2/CS236/proj1/Interpreter.h
+ /users/guest/j/jaredcr2/CS236/proj1/Parameter.h
+ /users/guest/j/jaredcr2/CS236/proj1/Predicate.h
+ /users/guest/j/jaredcr2/CS236/proj1/Relation.h
+ /users/guest/j/jaredcr2/CS236/proj1/Rule.h
+ /users/guest/j/jaredcr2/CS236/proj1/Tuple.h
 CMakeFiles/proj1.dir/LeftParenAutomaton.cpp.o
  /users/guest/j/jaredcr2/CS236/proj1/Automaton.h
  /users/guest/j/jaredcr2/CS236/proj1/LeftParenAutomaton.cpp
@@ -144,11 +155,16 @@ CMakeFiles/proj1.dir/UndefinedAutomaton.cpp.o
  /users/guest/j/jaredcr2/CS236/proj1/UndefinedAutomaton.h
 CMakeFiles/proj1.dir/main.cpp.o
  /users/guest/j/jaredcr2/CS236/proj1/Automaton.h
+ /users/guest/j/jaredcr2/CS236/proj1/Database.h
  /users/guest/j/jaredcr2/CS236/proj1/DatalogProgram.h
+ /users/guest/j/jaredcr2/CS236/proj1/Header.h
+ /users/guest/j/jaredcr2/CS236/proj1/Interpreter.h
  /users/guest/j/jaredcr2/CS236/proj1/Lexer.h
  /users/guest/j/jaredcr2/CS236/proj1/Parameter.h
  /users/guest/j/jaredcr2/CS236/proj1/Parser.h
  /users/guest/j/jaredcr2/CS236/proj1/Predicate.h
+ /users/guest/j/jaredcr2/CS236/proj1/Relation.h
  /users/guest/j/jaredcr2/CS236/proj1/Rule.h
  /users/guest/j/jaredcr2/CS236/proj1/Token.h
+ /users/guest/j/jaredcr2/CS236/proj1/Tuple.h
  /users/guest/j/jaredcr2/CS236/proj1/main.cpp

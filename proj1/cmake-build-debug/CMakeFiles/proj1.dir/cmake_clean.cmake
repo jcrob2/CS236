@@ -7,6 +7,7 @@ file(REMOVE_RECURSE
   "CMakeFiles/proj1.dir/Database.cpp.o"
   "CMakeFiles/proj1.dir/EndOfFileAutomaton.cpp.o"
   "CMakeFiles/proj1.dir/FactsAutomaton.cpp.o"
+  "CMakeFiles/proj1.dir/Graph.cpp.o"
   "CMakeFiles/proj1.dir/Header.cpp.o"
   "CMakeFiles/proj1.dir/IdAutomaton.cpp.o"
   "CMakeFiles/proj1.dir/Interpreter.cpp.o"

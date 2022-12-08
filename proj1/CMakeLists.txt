@@ -55,4 +55,6 @@ add_executable(proj1
         Relation.h
         Database.cpp
         Database.h
-        Interpreter.cpp Interpreter.h)
+        Interpreter.cpp
+        Interpreter.h
+        Graph.cpp Graph.h Node.h)

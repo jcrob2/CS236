@@ -35,6 +35,9 @@ public:
     void AddTuple(Tuple newTuple){tuples.insert(newTuple);}
     int GetTupleSize(){return this->tuples.size();}
 
+    //Project 5 functions
+    void sortGraphs();
+
     Relation* select1(int columnIndex, std::string value);   // (relation column and value to select)
     Relation* select2(int columnIndex1, int columnIndex2);   // (relation columns to select on same values)
     Relation* project(std::vector<int> colsToProject);       // (the columns to keep)
@@ -57,6 +60,8 @@ public:
     Header combineHeaders(Header h1, Header h2);
     bool isJoinable(Tuple t1, Tuple t2, Header h1, Header h2);
     Tuple combineTuples(Tuple t1, Tuple t2, Header h2, std::vector<std::string> val);
+
+    std::set<Tuple> getTuples() {return this->tuples;}
 
     std::string toString();
 

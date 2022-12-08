@@ -18,8 +18,11 @@ public:
         return new Relation(r);
     }
 
+    bool GetAdded(){return this->added;}
+    void SetAdded(bool val){this->added = val;}
 private:
     std::map<std::string, Relation> relations;
+    bool added;
 };
 
 

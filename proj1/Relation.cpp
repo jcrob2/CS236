@@ -1,4 +1,5 @@
 #include "Relation.h"
+#include <iostream>
 #include <sstream>
 
 Relation* Relation::select1(int columnIndex, std::string value) {
@@ -47,7 +48,6 @@ Relation* Relation::rename(std::vector<std::string> newColNames) {
     return rel;
 }
 
-//TODO FINISH THIS - Maybe done?
 Relation* Relation::join(Relation other){
     /* create new relation using the combineHeaders() function*/
     Relation* newRel = new Relation(this->name, combineHeaders(this->columnName, other.columnName));
@@ -72,22 +72,28 @@ Relation* Relation::join(Relation other){
     return newRel;
 }
 
-//TODO Verify Union works - maybe done?
 bool Relation::Union(Relation r){
-//    Relation* newRel = new Relation(this);
-//    for (auto const & t : r.tuples){
-//        newRel->tuples.insert(t);
-//    }
+
     bool added = false;
-    for (auto const & t : r.tuples){
+    for (auto t : r.tuples){
         if (this->tuples.insert(t).second){
+
+            std::string padding = "";
+            for (unsigned int i = 0; i < t.GetRowVals().size(); i++){
+                if (i == 0){
+                    std::cout << std::endl << " ";
+                }
+                std::cout << padding << " " << this->columnName.GetColNames()[i] << "=" << t.GetRowVals()[i];
+                padding = ",";
+            }
+
             added = true;
         }
     }
+    std::cout << std::endl;
     return added;
 }
 
-//TODO Verify combineHeaders works
 Header Relation::combineHeaders(Header h1, Header h2) {
     std::vector<std::string> svec = h1.GetColNames();
     Header* newHeader = new Header(svec);
@@ -100,7 +106,6 @@ Header Relation::combineHeaders(Header h1, Header h2) {
     return *newHeader;
 }
 
-//TODO Verify isJoinable works
 bool Relation::isJoinable(Tuple t1, Tuple t2, Header h1, Header h2) {
     for (unsigned int i = 0; i < h1.GetColNames().size(); i++){
        for (unsigned int j = 0; j < h2.GetColNames().size(); j++){
@@ -114,7 +119,6 @@ bool Relation::isJoinable(Tuple t1, Tuple t2, Header h1, Header h2) {
     return true;
 }
 
-//TODO Verify combineTuples() works
 Tuple Relation::combineTuples(Tuple t1, Tuple t2, Header h2, std::vector<std::string> val) {
     /*Create a new tuple that contains the values of t1*/
     Tuple* nt = new Tuple(t1);
@@ -144,7 +148,7 @@ std::string Relation::toString() {
         std::string padding = "";
         for (unsigned int i = 0; i < t.GetRowVals().size(); i++){
             if (i == 0){
-                output << std::endl;
+                output << std::endl << " ";
             }
             output << padding << " " << this->columnName.GetColNames()[i] << "=" << t.GetRowVals()[i];
             padding = ",";
